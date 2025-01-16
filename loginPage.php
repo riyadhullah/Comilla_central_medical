@@ -10,7 +10,7 @@
     <div class="login-container">
         <h1>Login</h1>
         <form action="dashboard.html" method="POST">
-            <div class="form-group">
+            <div class="form-group1">
                 <label for="user-type">User Type:</label>
                 <select id="user-type" name="user_type" required>
                     <option value="" disabled selected>Select User Type</option>

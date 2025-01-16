@@ -27,6 +27,12 @@ h1 {
 
 .form-group {
     margin-bottom: 15px;
+    width: 94.5%;
+    text-align: left;
+}
+
+.form-group1 {
+    margin-bottom: 15px;
     text-align: left;
 }
 
