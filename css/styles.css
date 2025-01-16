@@ -82,65 +82,8 @@ button {
 }
 
 /* Appointment Form Section - Fahad */
-.appointment-form {
-    background: #fff;
-    padding: 20px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 500px;
-}
 
-.appointment-form h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-}
 
-.appointment-form label {
-    font-size: 14px;
-    margin-top: 10px;
-    display: block;
-    color: #555;
-}
-
-.appointment-form input,
-.appointment-form select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.appointment-form input[type="radio"] {
-    width: auto;
-    margin-right: 5px;
-}
-
-.appointment-form .form-group {
-    margin-bottom: 15px;
-}
-
-.appointment-form .btn-group {
-    display: flex;
-    justify-content: space-between;
-}
-
-.appointment-form .btn-request {
-    background-color: #5cb85c;
-    color: white;
-}
-
-.appointment-form .btn-reset {
-    background-color: #d9534f;
-    color: white;
-}
-
-.appointment-form .recaptcha {
-    text-align: center;
-    margin-bottom: 10px;
-}
 
 /* Additional Styles - Siam */
 /* Add specific styles for other sections here */

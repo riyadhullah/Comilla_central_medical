@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #007BFF;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.appointment-form {
+    background: #fff;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 500px;
+}
+
+.appointment-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.appointment-form label {
+    font-size: 14px;
+    margin-top: 10px;
+    display: block;
+    color: #555;
+}
+
+.appointment-form input,
+.appointment-form select {
+    width: 100%;
+    padding: 6px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.appointment-form .radio-group {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Adjust spacing between options */
+    margin-top: 5px;
+}
+
+.appointment-form .radio-group input[type="radio"] {
+    margin-right: 5px;
+    width: auto; /* Keeps the button compact */
+}
+
+.appointment-form .radio-group label {
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+    cursor: pointer; /* Changes the cursor to a pointer for better UX */
+}
+
+.appointment-form .form-group {
+    margin-bottom: 5px;
+}
+
+.appointment-form .btn-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.appointment-form .btn-request {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.appointment-form .btn-reset {
+    background-color: #d9534f;
+    color: white;
+}
+
