@@ -43,7 +43,8 @@ button {
     cursor: pointer;
 }
 
-/* Login Section - Riyadh Ullah */
+
+/*Riyadh Ullah ---------------------------------------------------------------------------------------*/
 .login-container {
     background: #ffffff;
     padding: 20px 30px;
@@ -81,7 +82,8 @@ button {
     background-color: #0056b3;
 }
 
-/* Appointment Form Section - Fahad */
+/*Fahad ---------------------------------------------------------------------------------------*/
+
 .appointment-form {
     background: #fff;
     padding: 20px 40px;
@@ -142,5 +144,13 @@ button {
     margin-bottom: 10px;
 }
 
-/* Additional Styles - Siam */
+
+
+
+
+
+
+
+/*Siam ---------------------------------------------------------------------------------------*/
+
 /* Add specific styles for other sections here */
