@@ -13,7 +13,7 @@
             <h2>Menu</h2>
             <ul>
                 <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#appointments">Appointments</a></li>
+                <li><a href="/Comilla_central_medical/appointment.php">Appointments</a></li>
                 <li><a href="#patients">Patients</a></li>
                 <li><a href="#doctors">Doctors</a></li>
                 <li><a href="#departments">Departments</a></li>

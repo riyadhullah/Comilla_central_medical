@@ -6,33 +6,35 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f4f4f4;
+    background-color: #eef2f7; /* Softer background */
 }
 
 h1 {
     margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+    font-size: 26px; /* Slightly larger font */
+    color: #2c3e50; /* Darker shade */
 }
 
 label {
     display: block;
     font-size: 14px;
     margin-bottom: 5px;
-    color: #555;
+    color: #34495e;
 }
 
 input, select {
     width: 100%;
     padding: 10px;
     font-size: 14px;
-    border: 1px solid #ddd;
+    border: 1px solid #bdc3c7;
     border-radius: 5px;
     outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input:focus, select:focus {
-    border-color: #007BFF;
+    border-color: #2980b9; /* Highlight color */
+    box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
 }
 
 button {
@@ -40,59 +42,66 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+button:hover {
+    transform: translateY(-2px);
+}
+
 .appointment-form {
     background: #fff;
-    padding: 20px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     width: 500px;
 }
 
 .appointment-form h1 {
     text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    font-weight: bold;
 }
 
 .appointment-form label {
     font-size: 14px;
     margin-top: 10px;
     display: block;
-    color: #555;
+    color: #34495e;
 }
 
 .appointment-form input,
 .appointment-form select {
     width: 100%;
-    padding: 6px;
+    padding: 8px;
     margin-top: 5px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .appointment-form .radio-group {
     display: flex;
     align-items: center;
-    gap: 15px; /* Adjust spacing between options */
+    gap: 15px;
     margin-top: 5px;
 }
 
 .appointment-form .radio-group input[type="radio"] {
     margin-right: 5px;
-    width: auto; /* Keeps the button compact */
+    width: auto;
 }
 
 .appointment-form .radio-group label {
     margin: 0;
     color: #555;
     font-size: 14px;
-    cursor: pointer; /* Changes the cursor to a pointer for better UX */
+    cursor: pointer;
 }
 
 .appointment-form .form-group {
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
 .appointment-form .btn-group {
@@ -101,12 +110,130 @@ button {
 }
 
 .appointment-form .btn-request {
-    background-color: #5cb85c;
+    background-color: #27ae60;
     color: white;
+    font-weight: bold;
 }
 
 .appointment-form .btn-reset {
-    background-color: #d9534f;
+    background-color: #c0392b;
     color: white;
+    font-weight: bold;
+}
+
+.appointment-form .btn-request:hover {
+    background-color: #2ecc71;
+}
+
+.appointment-form .btn-reset:hover {
+    background-color: #e74c3c;
+}
+
+/* Container */
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background-color: #3498db;
+    color: white;
+    padding: 20px 10px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    height: 100%;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar ul li a:hover {
+    background-color: #2980b9;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Main content styles */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #fdfefe;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #2c3e50;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+.logout-button {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.logout-button:hover {
+    background-color: #d35400;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Content */
+.content {
+    margin-top: 20px;
+}
+/* Change the color of the Appointments link */
+.sidebar ul li:nth-child(2) a {
+    color: #16ece1; /* Change this to the desired color */
+}
+
+.sidebar ul li:nth-child(2) a:hover {
+    color: #159d4e; /* Change this to the hover color */
 }
 
