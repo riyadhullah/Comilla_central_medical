@@ -25,7 +25,27 @@
             <a href="loginPage.php" class="btn hero-btn">Get Started</a>
         </div>
     </section>
-
+<!-- New Section: Our Services -->
+<section class="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="service-cards">
+            <div class="service-card">
+                <img src="Image//Medical Consultation.png" alt="Medical Consultation" class="service-icon">
+                <h3>Medical Consultation</h3>
+                <p>Get expert medical advice and diagnosis from our experienced doctors.</p>
+            </div>
+            <div class="service-card">
+                <img src="Image//Emergency Care.png" alt="Emergency Care" class="service-icon">
+                <h3>Emergency Care</h3>
+                <p>Our emergency team is available 24/7 to provide critical care whenever needed.</p>
+            </div>
+            <div class="service-card">
+                <img src="Image//Diagnostic Services.png" alt="Diagnostic Services" class="service-icon">
+                <h3>Diagnostic Services</h3>
+                <p>Access a range of tests with fast and accurate results for better treatment.</p>
+            </div>
+        </div>
+    </section>
     <!-- Features Section -->
     <main class="features-section">
         <h2 class="section-title">Why Choose Us?</h2>
