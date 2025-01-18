@@ -12,14 +12,11 @@
         <nav class="sidebar">
             <h2>Menu</h2>
             <ul>
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#appointments" class="appointments-link" color="black">Appointments</a></li>
-                <li><a href="#patients">Patients</a></li>
-                <li><a href="#doctors">Doctors</a></li>
-                <li><a href="#departments">Departments</a></li>
+                <li><a href="/Comilla_central_medical/p_dashboard.php">Dashboard</a></li>
+                <li><a href="/Comilla_central_medical/appointment.php">Make Appointment</a></li>
+                <li><a href="/Comilla_central_medical/p_prescription.php">Prescription</a></li>
+                <li><a href="/Comilla_central_medical/p_view_appointment.php">View Appointment</a></li>
                 <li><a href="#billing">Billing</a></li>
-                <li><a href="#pharmacy">Pharmacy</a></li>
-                <li><a href="#reports">Reports</a></li>
                 <li><a href="#settings">Settings</a></li>
                 <li><a href="#help">Help</a></li>
             </ul>
@@ -89,7 +86,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Preferred Day for Appointment:</label>
+                    <label>Preferred Day and Date for Appointment:</label>
                     <select id="appointment-date" name="appointment-date" required>
                         <option value="">Day</option>
                         <option value="Saturday">Saturday</option>
@@ -100,6 +97,8 @@
                         <option value="Thursday">Thursday</option>
                         <option value="Friday">Friday</option>
                     </select>
+                    <label for="Date">Date :</label>
+                    <input type="date" name="date" id="date" required>
                 </div>
                 
                 <div class="btn-group">
