@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospital Management System</title>
+    <title>Comilla Central Medical</title>
     <link rel="stylesheet" href="css/homePage.css">
 </head>
 <body>
     <!-- Header Section -->
     <header class="header">
         <div class="logo">
-            <h1>Hospital Management System</h1>
+            <h1>Comilla Central Medical</h1>
         </div>
         <div class="login-btn">
             <a href="loginPage.php" class="btn">Login</a>
