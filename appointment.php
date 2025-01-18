@@ -13,6 +13,7 @@
             <h2>Menu</h2>
             <ul>
                 <li><a href="/Comilla_central_medical/p_dashboard.php">Dashboard</a></li>
+                <li><a href="/Comilla_central_medical/p_profile.php">Profile</a></li>
                 <li><a href="/Comilla_central_medical/appointment.php">Make Appointment</a></li>
                 <li><a href="/Comilla_central_medical/p_prescription.php">Prescription</a></li>
                 <li><a href="/Comilla_central_medical/p_view_appointment.php">View Appointment</a></li>
@@ -32,6 +33,10 @@
             <!-- Appointment Form -->
             <form class="appointment-form" action="submit.php" method="post">
                 <h1>Make Appointment</h1>
+                <div class="form-group">
+                    <label for="mobile">Mobile:</label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
+                </div>
                 
                 <div class="form-group">
                     <label for="fullname">Patient's Full Name:</label>
@@ -57,10 +62,6 @@
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="mobile">Mobile:</label>
-                    <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
-                </div>
                 
                 <div class="form-group">
                     <label for="email">Email:</label>
