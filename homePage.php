@@ -13,7 +13,7 @@
             <h1>Hospital Management System</h1>
         </div>
         <div class="login-btn">
-            <a href="login.php" class="btn">Login</a>
+            <a href="loginPage.php" class="btn">Login</a>
         </div>
     </header>
 
@@ -22,7 +22,7 @@
         <div class="hero-text">
             <h2>Welcome to the Future of Healthcare</h2>
             <p>Streamline hospital operations, ensure patient satisfaction, and deliver seamless services with our cutting-edge Hospital Management System.</p>
-            <a href="login.php" class="btn hero-btn">Get Started</a>
+            <a href="loginPage.php" class="btn hero-btn">Get Started</a>
         </div>
     </section>
 
