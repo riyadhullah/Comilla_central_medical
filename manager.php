@@ -1,11 +1,11 @@
 <?php
 session_start();
-include 'hospitalmanagementsystem.php';
+include 'db.php';
 
-if ($_SESSION['Role'] != 'Manager') {
-    header("Location: login.php");
-    exit();
-}
+// if ($_SESSION['Role'] != 'Manager') {
+//     header("Location: login.php");
+//     exit();
+// }
 
 // Handle CRUD Operations
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -74,7 +74,7 @@ $tests = $conn->query("SELECT * FROM Tests");
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/manager.css">
     <title>Manager Dashboard</title>
 </head>
 <body>

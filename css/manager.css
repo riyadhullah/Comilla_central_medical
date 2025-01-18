@@ -1,0 +1,85 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center Headings */
+h1, h2 {
+    text-align: center; /* Center align headings */
+    color: #333;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Center Forms */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the form content */
+    margin-top: 10px;
+}
+
+form input, form select, form button {
+    margin: 5px 0;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 40%; /* Set fields to half size of the original */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+form button {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Table Styles */
+table {
+    margin: 20px auto; /* Center the table */
+    width: 90%; /* Adjust table width */
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 6px 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+}
+
+table th {
+    background-color: #9140bd;
+    color: white;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Content Alignment */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+}
