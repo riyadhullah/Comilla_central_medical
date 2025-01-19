@@ -18,7 +18,12 @@
                 <li><a href="/Comilla_central_medical/p_prescription.php">Prescription</a></li>
                 <li><a href="/Comilla_central_medical/p_view_appointment.php">View Appointment</a></li>
                 <li><a href="#billing">Billing</a></li>
-                <li><a href="#settings">Settings</a></li>
+                <li><div class="settings-menu">
+                    <a href="#settings" id="settings-icon">Settings</a>
+                    <div class="dropdown" id="settings-dropdown" style="display: none;">
+                        <a href="/Comilla_central_medical/p_change_pass.php">Change Password</a>
+                    </div>
+                </div></li>
                 <li><a href="#help">Help</a></li>
             </ul>
         </nav>
@@ -109,5 +114,6 @@
             </form>
         </div>
     </div>
+    <script src="/Comilla_central_medical/p_setting.js"></script>
 </body>
 </html>

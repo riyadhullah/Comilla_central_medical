@@ -1,29 +1,3 @@
-<?php
-session_start();
-$_SESSION['patient_name'] = "John Doe"; // Example patient name
-
-// Example appointment data
-$appointments = [
-    [
-        "date" => "2025-01-15",
-        "doctor" => "Dr. Sarah Ahmed",
-        "time" => "10:00 AM",
-        "status" => "Confirmed"
-    ],
-    [
-        "date" => "2025-01-20",
-        "doctor" => "Dr. David Smith",
-        "time" => "2:00 PM",
-        "status" => "Pending"
-    ],
-    [
-        "date" => "2025-01-25",
-        "doctor" => "Dr. Emily Johnson",
-        "time" => "11:30 AM",
-        "status" => "Completed"
-    ]
-];
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +5,7 @@ $appointments = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appointments - Comilla Central Medical</title>
-    <link rel="stylesheet" href="css\p_view_appointment.css">
+    <link rel="stylesheet" href="css\p_change_pass.css">
 </head>
 <body>
     <div class="container">
@@ -61,27 +35,34 @@ $appointments = [
             <header>
                 <h1>Comilla Central Medical</h1>
                 <button class="logout-button">Logout</button>
-            </header>
+            </header> 
 
-            <!-- Second Header for the dashboard -->
-            <header>
-                <h1>Your Appointment</h1>
-                <p>Welcome, <?php echo htmlspecialchars($_SESSION['patient_name']); ?>!</p>
-            </header>
+            <div class="container">
+        
 
-            <!-- Appointments List -->
-            <div class="content">
-                <?php foreach ($appointments as $appointment): ?>
-                    <div class="appointment">
-                        <h2>Date: <?php echo htmlspecialchars($appointment['date']); ?></h2>
-                        <p><strong>Doctor:</strong> <?php echo htmlspecialchars($appointment['doctor']); ?></p>
-                        <p><strong>Time:</strong> <?php echo htmlspecialchars($appointment['time']); ?></p>
-                        <div class="status <?php echo htmlspecialchars($appointment['status']); ?>">
-                            Status: <?php echo htmlspecialchars($appointment['status']); ?>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+        <?php if (!empty($success_message)) : ?>
+            <p class="success"><?php echo $success_message; ?></p>
+        <?php endif; ?>
+
+        <?php if (!empty($error_message)) : ?>
+            <p class="error"><?php echo $error_message; ?></p>
+        <?php endif; ?>
+
+        <form class="appointment-form" action="" method="POST">
+            <h1>Change Password</h1>
+            <label for="current_password">Current Password:</label>
+            <input type="password" name="current_password" id="current_password" required>
+
+            <label for="new_password">New Password:</label>
+            <input type="password" name="new_password" id="new_password" required>
+
+            <label for="confirm_password">Confirm New Password:</label>
+            <input type="password" name="confirm_password" id="confirm_password" required>
+
+            <button type="submit" class="btn-group">Change Password</button>
+        </form>
+    </div>
+
         </div>
     </div>
     <script src="/Comilla_central_medical/p_setting.js"></script>

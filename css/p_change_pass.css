@@ -1,20 +1,16 @@
-/* General styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     background-color: #eef2f7; /* Softer background */
+    min-height: 100vh; /* Ensure full height */
 }
 
 .container {
     display: flex;
-    width: 100%;
-    height: 100%;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    width: 100%; /* Full width */
+    flex-wrap: nowrap; /* Prevent wrapping */
 }
 
 .sidebar {
@@ -23,8 +19,8 @@ body {
     color: white;
     padding: 20px 10px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    height: auto; /* Full height sidebar */
-   
+    height: 100vh; /* Full height of the viewport */
+    position: fixed; /* Keep sidebar fixed */
 }
 
 .sidebar h2 {
@@ -89,11 +85,9 @@ body {
  }
 
 .main-content {
-    flex-grow: 1;
-    padding: 35px 10px; /* change top bar logout */
-    display: flex;
-    flex-direction: column;
-    position: relative;
+    margin-left: 270px; /* Push main content to the right of the sidebar */
+    padding: 35px 10px;
+    flex-grow: 1; /* Allow main content to expand */
     background: #fdfefe;
     overflow-y: auto;
     scroll-behavior: smooth;
@@ -104,8 +98,8 @@ header {
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 header h1 {
@@ -140,20 +134,23 @@ header h1 {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-}
+ }
+
 /* Form Styles */
 .appointment-form {
     background: #fff;
-    padding: 30px 150px;
+    padding: 30px;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: 300px;
-    margin-top: 10px;
-    float: center;
-    top: 20%; /* Push down to 50% of the viewport height */
-    left: 20%; /* Push right to 50% of the viewport width */
-    transform: translate(50%, 0%); /* Adjust the position back to center */
-    
+    width: 80%; /* Responsive width */
+    max-width: 400px; /* Maximum width for large screens */
+    margin: auto; /* Center the form horizontally and vertically */
+    position: absolute; /* Allows centering in the viewport */
+    top: 50%; /* Push down to 50% of the viewport height */
+    left: 50%; /* Push right to 50% of the viewport width */
+    transform: translate(-30%, -50%); /* Adjust the position back to center */
+    flex-direction: column;
+    align-items: center;
 }
 .appointment-form h1 {
     text-align: center;
@@ -203,57 +200,24 @@ header h1 {
 }
 
 .appointment-form .btn-group {
-    display: flex;
-    justify-content: space-between;
+    text-align: center; /* Center buttons horizontally */
 }
 
-.appointment-form .btn-request {
-    background-color: #27ae60;
-    color: white;
-    font-weight: bold;
-}
-
-.appointment-form .btn-reset {
-    background-color: #c0392b;
-    color: white;
-    font-weight: bold;
-    transform: translate(25%, 0%);
-}
-
-.appointment-form .btn-request:hover {
-    background-color: #2ecc71;
-}
-
-.appointment-form .btn-reset:hover {
-    background-color: #e74c3c;
-}
-button {
-    display: block;
-    /* Center the button horizontally */
+.appointment-form button {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin: 10px auto;
+    display: block;
 }
 
-button:hover {
+.appointment-form button:hover {
     transform: translateY(-2px);
+    background-color: #0056b3;
 }
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        text-align: center;
-    }
-
-    .appointment-form {
-        padding: 20px;
-    }
+.appointment-form .btn-reset:hover {
+    background-color: #e74c3c;
 }

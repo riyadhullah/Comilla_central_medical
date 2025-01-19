@@ -24,7 +24,12 @@ $_SESSION['patient_name'] = "John Doe"; // Example patient name
                 <li><a href="/Comilla_central_medical/p_prescription.php">Prescription</a></li>
                 <li><a href="/Comilla_central_medical/p_view_appointment.php">View Appointment</a></li>
                 <li><a href="/Comilla_central_medical/p_profile.php">Billing</a></li>
-                <li><a href="/Comilla_central_medical/p_setting.php">Settings</a></li>
+                <li><div class="settings-menu">
+                    <a href="#settings" id="settings-icon">Settings</a>
+                    <div class="dropdown" id="settings-dropdown" style="display: none;">
+                        <a href="/Comilla_central_medical/p_change_pass.php">Change Password</a>
+                    </div>
+                </div></li>
                 <li><a href="#help">Help</a></li>
             </ul>
         </nav>
@@ -75,5 +80,6 @@ $_SESSION['patient_name'] = "John Doe"; // Example patient name
             </div>
         </div>
     </div>
+    <script src="/Comilla_central_medical/p_setting.js"></script>
 </body>
 </html>

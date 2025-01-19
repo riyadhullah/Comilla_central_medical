@@ -58,7 +58,12 @@ $prescriptions = [
                 <li><a href="/Comilla_central_medical/p_prescription.php">Prescription</a></li>
                 <li><a href="/Comilla_central_medical/p_view_appointment.php">View Appointment</a></li>
                 <li><a href="/Comilla_central_medical/billing.php">Billing</a></li>
-                <li><a href="/Comilla_central_medical/settings.php">Settings</a></li>
+                <li><div class="settings-menu">
+                    <a href="#settings" id="settings-icon">Settings</a>
+                    <div class="dropdown" id="settings-dropdown" style="display: none;">
+                        <a href="/Comilla_central_medical/p_change_pass.php">Change Password</a>
+                    </div>
+                </div></li>
                 <li><a href="#help">Help</a></li>
             </ul>
         </nav>
@@ -72,7 +77,7 @@ $prescriptions = [
 
             <!-- Second Header for the dashboard -->
             <header>
-                <h1>Your Appointment</h1>
+                <h1>Your Prescription</h1>
                 <p>Welcome, <?php echo htmlspecialchars($_SESSION['patient_name']); ?>!</p>
             </header>
 
@@ -103,6 +108,7 @@ $prescriptions = [
             </footer>
         </div>
     </div>
+    <script src="/Comilla_central_medical/p_setting.js"></script>
 </body>
 
 </html>
