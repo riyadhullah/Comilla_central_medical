@@ -1,85 +1,123 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-}
-
-/* Center Headings */
-h1, h2 {
-    text-align: center; /* Center align headings */
+/* Aligning Manager Content */
+.content h2 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 15px;
     color: #333;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Center Forms */
 form {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center align the form content */
-    margin-top: 10px;
+    align-items: center;
+    margin: 20px 0;
 }
 
 form input, form select, form button {
-    margin: 5px 0;
-    padding: 6px 10px;
+    margin: 8px 0;
+    padding: 6px 12px;
     font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 40%; /* Set fields to half size of the original */
-    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 40%; /* Smaller input fields */
 }
 
-form button {
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-form button:hover {
-    background-color: #0056b3;
-}
-
-/* Table Styles */
 table {
-    margin: 20px auto; /* Center the table */
-    width: 90%; /* Adjust table width */
+    margin: 20px auto;
+    width: 90%; /* Adjust table size */
     border-collapse: collapse;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 table th, table td {
     padding: 6px 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    text-align: center;
+    border: 1px solid #ddd;
     font-size: 14px;
-    color: #333;
 }
 
 table th {
-    background-color: #9140bd;
+    background-color: #007bff;
     color: white;
-    font-weight: bold;
 }
 
 table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-table tr:hover {
-    background-color: #f1f1f1;
+.delete-button {
+    background-color: #dc3545; /* Red button */
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-/* Content Alignment */
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center content horizontally */
+.delete-button:hover {
+    background-color: #c82333; /* Darker red on hover */
 }
+
+.add-room-button {
+    background-color: #2b912b; /* Light green color */
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.add-room-button:hover {
+    background-color: #2b912b; /* Darker green on hover */
+}
+
+/* ------------------------input container starts----------------------- */
+.input-container {
+    background-color: #4e5153; /* Purple background */
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.input-container input,
+.input-container select {
+    width: 200px; /* Ensure all inputs and select are the same width */
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    height: 35px; /* Ensure consistent height */
+}
+
+.input-container button {
+    width: 100px; /* Half the width of the text boxes */
+    height: 35px; /* Match the height of the text boxes */
+    padding: 6px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(12, 119, 12); /* Light green color for the button */
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.input-container button:hover {
+    background-color: rgb(12, 119, 12); /* Darker green on hover */
+}
+
+.sidebar ul li a[href="#rooms"] {
+    color: #00008b; /* Deep Blue Color */
+    font-weight: bold; /* Optional: Make it bold for emphasis */
+}
+
+
+/* ------------------------input container ends----------------------- */
+
