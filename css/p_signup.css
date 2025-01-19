@@ -110,12 +110,15 @@ header h1 {
 /* Form Styles */
 .appointment-form {
     background: #fff;
-    padding: 30px 300px;
+    padding: 30px 150px;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: auto;
+    width: 300px;
     margin-top: 10px;
     float: center;
+    top: 20%; /* Push down to 50% of the viewport height */
+    left: 20%; /* Push right to 50% of the viewport width */
+    transform: translate(50%, 0%); /* Adjust the position back to center */
     
 }
 .appointment-form h1 {
@@ -168,6 +171,7 @@ header h1 {
 .appointment-form .btn-group {
     display: flex;
     justify-content: space-between;
+    transform: translate(40%, 0%); /* Adjust the position back to center */
 }
 
 .appointment-form .btn-request {
