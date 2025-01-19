@@ -13,12 +13,11 @@
             <h2>Menu</h2>
             <ul>
                 <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#admission">Admission</a></li>
                 <li><a href="/Comilla_central_medical/appointment.php">Appointments</a></li>
                 <li><a href="#patients">Patients</a></li>
                 <li><a href="#doctors">Doctors</a></li>
-                <li><a href="#departments">Departments</a></li>
                 <li><a href="#billing">Billing</a></li>
-                <li><a href="#pharmacy">Pharmacy</a></li>
                 <li><a href="#reports">Reports</a></li>
                 <li><a href="#settings">Settings</a></li>
                 <li><a href="#help">Help</a></li>
