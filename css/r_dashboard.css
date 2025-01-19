@@ -225,7 +225,6 @@ section ul li a:focus-visible {
 .patient-search h3 {
     margin-bottom: 20px;
     font-size: 20px;
-    color: #333;
 }
 
 .patient-search form {
@@ -284,7 +283,6 @@ section ul li a:focus-visible {
 }
 
 .appointments {
-    /* display: none; */
     margin-top: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -300,6 +298,7 @@ section ul li a:focus-visible {
 }
 
 .appointments table {
+    display: none; /* ------------------------------------ */
     width: 100%;
     border-collapse: collapse;
 }

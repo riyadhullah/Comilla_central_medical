@@ -60,7 +60,7 @@
 
         <!-- Appointments Section -->
         <section class="appointments">
-                <h4>Patient Appointments</h4>
+                <h3>Patient Appointments</h3>
                 <table>
                     <thead>
                         <tr>
