@@ -82,6 +82,14 @@ header h1 {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     letter-spacing: 1px;
 }
+header p {
+    margin: 0;
+    font-size: 20px;
+    color: #10b39d;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
 
 .logout-button {
     background-color: #e67e22;
@@ -115,10 +123,10 @@ header h1 {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     width: 300px;
     margin-top: 10px;
-    float: center;
+   
     top: 20%; /* Push down to 50% of the viewport height */
     left: 20%; /* Push right to 50% of the viewport width */
-    transform: translate(50%, 0%); /* Adjust the position back to center */
+    transform: translate(70%, 0%); /* Adjust the position back to center */
     
 }
 .appointment-form h1 {
@@ -127,6 +135,7 @@ header h1 {
     color: #2c3e50;
     font-weight: bold;
 }
+
 
 .appointment-form label {
     font-size: 14px;
@@ -144,7 +153,23 @@ header h1 {
     border: 1px solid #ccc;
     border-radius: 8px;
 }
-
+.error {
+    color: #d9534f;
+    font-size: 12px;
+    display: block;
+    margin: 5px;
+}
+.success {
+    color: #5cb85c;
+    font-size: 12px;
+    display: none;
+}
+.invalid {
+    border-color: #d9534f;
+}
+.valid {
+    border-color: #5cb85c;
+}
 .appointment-form .radio-group {
     display: flex;
     align-items: center;
@@ -207,6 +232,8 @@ button {
 button:hover {
     transform: translateY(-2px);
 }
+
+
 
 /* Responsive Styles */
 @media (max-width: 768px) {

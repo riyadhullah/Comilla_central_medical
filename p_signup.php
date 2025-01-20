@@ -1,65 +1,3 @@
-<?php
-// Database connection details
-$servername = "localhost";
-$username = "root"; // Change as per your database credentials
-$password = "";     // Change as per your database credentials
-$dbname = "hospitalmanagementsystem"; // Name of your database
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Handle form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize and validate form inputs
-    $full_name = $_POST['full_name'];
-    $dob = $_POST['dob'];
-    $gender = $_POST['gender'];
-    $contact_number = $_POST['contact_number'];
-    $email = $_POST['email'];
-    $password = $_POST['password']; // Secure password storage
-    $address = $_POST['address'];
-    $blood_group = $_POST['blood_group'];
-
-   // Check for duplicate entries
-   $duplicateCheck = "SELECT * FROM patientinformation WHERE ContactNumber='$contact_number'";
-   $result = $conn->query($duplicateCheck);
-
-    if ($result->num_rows > 0) {
-        echo "
-        <script>
-            window.history.back();
-            alert('This contact number ($contact_number) is already registered. Please use a different number.'); 
-        </script>
-        ";
-    } else {
-        // Insert data using prepared statement
-        // SQL query to insert data
-        $sql = "INSERT INTO patientinformation (PatientName, DateOfBirth, Gender, ContactNumber, Email, Password, Address, BloodGroup) 
-                VALUES ('$full_name', '$dob', '$gender', '$contact_number', '$email', '$password', '$address', '$blood_group')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "
-            <script>
-                window.location.href = '/Comilla_central_medical/p_dashboard.php'; // Redirect to dashboard
-                alert('Signup successful! You can now log in.');
-            </script>
-            ";
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-    }
-
-    // Close the connection
-    $stmt->close();
-    $conn->close();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,56 +5,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Signup</title>
     <link rel="stylesheet" href="css/p_signup.css">
-    <script>
-        // Client-side validation
-        function validateForm() {
-            const contactNumber = document.getElementById("contact_number").value;
-            const password = document.getElementById("password").value;
 
-            if (!/^\d{11}$/.test(contactNumber)) { // Example: 11-digit validation
-                alert("Please enter a valid 11-digit contact number.");
-                return false;
-            }
-
-            if (password.length < 8) {
-                alert("Password must be at least 8 characters long.");
-                return false;
-            }
-
-            return true;
-        }
-    </script>
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar Menu -->
-        <nav class="sidebar">
-            <h2>Menu</h2>
-            <ul>
-                <li><a href="/Comilla_central_medical/p_dashboard.php">Dashboard</a></li>
-                <li><a href="/Comilla_central_medical/p_profile.php">Profile</a></li>
-                <li><a href="/Comilla_central_medical/appointment.php">Make Appointment</a></li>
-                <li><a href="/Comilla_central_medical/p_prescription.php">Prescription</a></li>
-                <li><a href="/Comilla_central_medical/p_view_appointment.php">View Appointment</a></li>
-                <li><a href="/Comilla_central_medical/p_profile.php">Billing</a></li>
-                <li><a href="/Comilla_central_medical/settings.php">Settings</a></li>
-                <li><a href="#help">Help</a></li>
-            </ul>
-        </nav>
-
+    
         <!-- Main Content -->
         <div class="main-content">
             <header>
                 <h1>Comilla Central Medical</h1>
-                <button class="logout-button">Logout</button>
+                <p>You have Olready Account <a href="/Comilla_central_medical/loginPage.php">Please Login</a></p>
             </header>
 
             <!-- Signup Form -->
-            <form class="appointment-form" action="" method="post" onsubmit="return validateForm()">
+            <form class="appointment-form" action="/Comilla_central_medical/p_signupData.php" method="post" onsubmit="return validateForm()">
                 <h1>Patient Signup</h1>
                 <div class="form-group">
                     <label for="full_name">Full Name</label>
                     <input type="text" id="full_name" name="full_name" required>
+                    <small class="error" id="name_error"></small>
+ 
                 </div>
                 <div class="form-group">
                     <label for="dob">Date of Birth</label>
@@ -134,14 +41,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="form-group">
                     <label for="contact_number">Contact Number</label>
                     <input type="text" id="contact_number" name="contact_number" required>
+                    <small class="error" id="contact_error"></small>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>
+                    <small class="error" id="email_error"></small>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
+                    <small class="error" id="password_error"></small>
+                    
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
@@ -166,6 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </form>
         </div>
-    </div>
+    <script src="/Comilla_central_medical/p_signup.js"></script>
 </body>
 </html>
