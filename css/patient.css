@@ -106,94 +106,127 @@ header h1 {
     margin-top: 20px;
 }
 
-.admission-form {
+
+/* Patient Management Section */
+.patient-management {
     background: #fff;
-    padding: 30px 150px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: 300px;
-    margin-top: 10px;
-    float: center;
-    top: 20%; /* Push down to 50% of the viewport height */
-    left: 20%; /* Push right to 50% of the viewport width */
-    transform: translate(50%, 0%); /* Adjust the position back to center */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
 }
 
-.admission-form h1 {
-    text-align: center;
-    margin-bottom: 25px;
+.patient-management h3 {
     color: #2c3e50;
+    margin-bottom: 15px;
     font-weight: bold;
 }
 
-.admission-form label {
-    font-size: 14px;
-    margin-top: 10px;
+.search-form label {
     display: block;
+    margin-top: 10px;
     color: #34495e;
+    font-size: 14px;
 }
 
-.admission-form input,
-.admission-form select,
-.admission-form textarea {
-    width: 100%;
+.search-form input {
+    width: 98%;
     padding: 10px;
     margin-top: 5px;
-    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
-}
-
-.admission-form .form-group {
     margin-bottom: 15px;
 }
 
+/* Patient Table */
+.patient-table {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
+.patient-table h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
 
-.submit-button {
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
     background-color: #007BFF;
     color: white;
+}
+
+.edit-btn {
+    background-color: #f39c12;
+    color: white;
     border: none;
-    border-radius: 8px;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-    width: 108%;
 }
 
-.submit-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+.edit-btn:hover {
+    background-color: #e67e22;
 }
 
-.submit-button:active {
-    transform: translateY(0);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+.delete-btn {
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
-.admission-form textarea {
-    resize: vertical;
+
+.delete-btn:hover {
+    background-color: #e74c3c;
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    .admission-form {
-        padding: 20px;
-        width: 100%;
-        top: 10%;
+    .patient-management, .patient-table {
+        padding: 15px;
     }
 
-    .admission-form .btn-group {
-        flex-direction: column;
-        gap: 10px;
+    table th, table td {
+        font-size: 12px;
+        padding: 8px;
     }
 
-    .admission-form .btn-submit,
-    .admission-form .btn-reset {
-        width: 100%;
+    .search-form input {
+        padding: 8px;
     }
+
+    .search-form button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+
+.discharge-btn {
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.discharge-btn:hover {
+    background-color: #e74c3c;
 }

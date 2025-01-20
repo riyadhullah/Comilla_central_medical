@@ -54,6 +54,19 @@
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
 
+                    <label for="blood-group">Blood Group:</label>
+                    <select id="blood-group" name="blood-group" required>
+                        <option value="">Select</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+
                     <label for="address">Address:</label>
                     <textarea id="address" name="address" rows="3" required></textarea>
 
@@ -78,6 +91,7 @@
                     <input type="date" id="admission-date" name="admission-date" required>
 
                     <button type="submit" class="submit-button">Admit Patient</button>
+                </form>
                 </form>
             </div>
         </div>
