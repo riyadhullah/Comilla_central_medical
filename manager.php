@@ -60,10 +60,11 @@ $rooms = $conn->query("SELECT * FROM room");
         <nav class="sidebar">
             <h2>Menu</h2>
             <ul>
-                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="/Comilla_central_medical/managerDashboard.php">Dashboard</a></li>
                 <li><a href="/Comilla_central_medical/manager.php">Manage Rooms</a></li>
                 <li><a href="/Comilla_central_medical/manageDoctor.php">Manage Doctors</a></li>
                 <li><a href="/Comilla_central_medical/manageTests.php">Manage Tests</a></li>
+                <li><a href="/Comilla_central_medical/manageReceptionist.php">Manage Receptionist</a></li>
                 <li><a href="#settings">Settings</a></li>
                 <li><a href="#help">Help</a></li>
             </ul>
