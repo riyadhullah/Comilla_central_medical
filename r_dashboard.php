@@ -1,3 +1,47 @@
+<?php
+include 'db.php';
+
+$sql = "SELECT *FROM patient";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+$countPatient = mysqli_num_rows($result);
+
+$sql = "SELECT * FROM `admission` WHERE `AdmissionStatus` LIKE 'Admitted'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+$countAdmittedPatient = mysqli_num_rows($result);
+
+$sql = "SELECT * FROM `doctor`";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+$countDoctor = mysqli_num_rows($result);
+
+$sql = "SELECT * FROM `room`";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+$countRoom = mysqli_num_rows($result);
+
+
+
+$sql = "SELECT 
+            a.AppointmentID, 
+            p.PatientName, 
+            p.ContactNumber, 
+            d.DoctorName, 
+            d.Specialization, 
+            a.AppointmentDate
+        FROM `appointment` a
+        INNER JOIN `patient` p ON a.PatientID = p.PatientID
+        INNER JOIN `doctor` d ON a.DoctorID = d.DoctorID
+        WHERE a.Status = 'Pending'";
+
+$result11 = mysqli_query($conn, $sql);
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,19 +77,19 @@
         <section class="overview">
             <div class="card">
                 <h4>Total Patients</h4>
-                <p>125</p>
+                <p><?php echo $countPatient ?></p>
             </div>
             <div class="card">
                 <h4>Admitted Patients</h4>
-                <p>45</p>
+                <p><?php echo $countAdmittedPatient ?></p>
             </div>
             <div class="card">
                 <h4>Total Doctors</h4>
-                <p>20</p>
+                <p><?php echo $countDoctor ?></p>
             </div>
             <div class="card">
                 <h4>Available Rooms</h4>
-                <p>10</p>
+                <p><?php echo $countRoom ?></p>
             </div>
 
             
@@ -57,56 +101,42 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Mobile Number</th>
+                            <th>Appointment Id</th>
                             <th>Name</th>
-                            <th>Date of Birth</th>
-                            <th>Sex</th>
-                            <th>Email</th>
+                            <th>Mobile Number</th>
+                            <th>Date for Appointment</th>
                             <th>Specialty for Consultation</th>
                             <th>Doctor</th>
-                            <th>Preferred Day</th>
-                            <th>Date for Appointment</th>
-                            <th>Submission Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1234567890</td>
-                            <td>John Doe</td>
-                            <td>1990-05-15</td>
-                            <td>Male</td>
-                            <td>johndoe@example.com</td>
-                            <td>Cardiology</td>
-                            <td>Dr. Smith</td>
-                            <td>Monday</td>
-                            <td>2025-01-25</td>
-                            <td>2025-01-19</td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="accept">Accept</button>
-                                    <button class="reject">Reject</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>0987654321</td>
-                            <td>Jane Roe</td>
-                            <td>1985-09-25</td>
-                            <td>Female</td>
-                            <td>janeroe@example.com</td>
-                            <td>Dermatology</td>
-                            <td>Dr. Adams</td>
-                            <td>Wednesday</td>
-                            <td>2025-01-27</td>
-                            <td>2025-01-18</td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="accept">Accept</button>
-                                    <button class="reject">Reject</button>
-                                </div>
-                            </td>
-                        </tr>
+                        <?php 
+                        while ($row = mysqli_fetch_array($result11, MYSQLI_ASSOC)) {
+                            echo "
+                            <tr>
+                                <td>{$row['AppointmentID']}</td>
+                                <td>{$row['PatientName']}</td>
+                                <td>{$row['ContactNumber']}</td>
+                                <td>{$row['AppointmentDate']}</td>
+                                <td>{$row['Specialization']}</td>
+                                <td>{$row['DoctorName']}</td>
+                                <td>
+                                    <form method='POST' action='update_appointment_status.php' class='appointment-form'>
+                                        <input type='hidden' name='appointmentId' value='{$row['AppointmentID']}'>
+                                        <input type='hidden' name='status' value='Accepted'>
+                                        <button type='submit' class='accept-btn'>Accept</button>
+                                    </form>
+                                    <form method='POST' action='update_appointment_status.php' class='appointment-form'>
+                                        <input type='hidden' name='appointmentId' value='{$row['AppointmentID']}'>
+                                        <input type='hidden' name='status' value='Rejected'>
+                                        <button type='submit' class='reject-btn'>Reject</button>
+                                    </form>
+
+                                </td>
+                            </tr>";
+                        }
+                        ?>
                     </tbody>
                 </table>
             </section>
@@ -157,28 +187,6 @@
                 document.getElementById('patient-details').style.display = 'block';
             }
         </script>
-
-        <!-- Quick Actions Section -->
-        <section class="quick-actions">
-            <h3>Quick Actions</h3>
-            <ul>
-                <li><a href="#">Admit New Patient</a></li>
-                <li><a href="#">Schedule Appointments</a></li>
-                <li><a href="#">Generate Billing</a></li>
-                <li><a href="#">Update Room Availability</a></li>
-            </ul>
-        </section>
-
-        <!-- Notifications Section -->
-        <section class="notifications">
-            <h3>Notifications</h3>
-            <ul>
-                <li>John Doe has been admitted to Room 101.</li>
-                <li>Dr. Smith has updated his schedule.</li>
-                <li>5 new patients have been registered today.</li>
-                <li>Room 202 is now available.</li>
-            </ul>
-        </section>
     </div>
 
         </div>

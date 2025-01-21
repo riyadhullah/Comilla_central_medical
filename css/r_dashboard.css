@@ -344,3 +344,41 @@ section ul li a:focus-visible {
 .appointments .reject:hover {
     background-color: #c82333;
 }
+
+/* Styling for the forms */
+.appointment-form {
+    display: inline-block;
+    margin: 0 10px; /* Adds spacing between the forms */
+}
+
+/* General button styling */
+.appointment-form button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Accept button styling */
+.accept-btn {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.accept-btn:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* Reject button styling */
+.reject-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.reject-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
