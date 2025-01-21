@@ -31,7 +31,9 @@
         <div class="main-content">
             <header>
                 <h1>Comilla Central Medical</h1>
-                <button class="logout-button">Logout</button>
+                <form action="logout.php" method="POST">
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
             </header>
             
             <!-- Appointment Form -->
