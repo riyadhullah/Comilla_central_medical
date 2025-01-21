@@ -10,17 +10,18 @@ body {
 /* Sidebar styles */
 .sidebar {
     width: 250px;
-    background-color: #343a40;
+    background-color: #007BFF;
     color: white;
-    padding: 20px 10px;
-    height: 100%;
+    padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height: 100%;
 }
 
 .sidebar h2 {
     text-align: center;
+    font-size: 20px;
+    font-weight: bold;
     margin-bottom: 20px;
-    font-size: 18px;
 }
 
 .sidebar ul {
@@ -29,20 +30,19 @@ body {
 }
 
 .sidebar ul li {
-    margin: 10px 0;
+    margin-bottom: 10px;
 }
 
 .sidebar ul li a {
-    text-decoration: none;
     color: white;
-    padding: 10px;
+    text-decoration: none;
+    padding: 10px 15px;
     display: block;
     border-radius: 5px;
-    transition: background 0.3s;
 }
 
 .sidebar ul li a:hover {
-    background-color: #495057;
+    background-color: #0056b3;
 }
 
 /* Main content */
@@ -78,41 +78,11 @@ header h1 {
     background-color: #c82333;
 }
 
-/* Input form */
-.input-container {
-    margin: 20px 0;
-    padding: 15px;
-    background-color: #f1f3f5;
-    border-radius: 8px;
-}
-
-.input-container input,
-.input-container select {
-    margin: 8px 0;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    width: calc(33% - 20px);
-}
-
-.input-container button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.input-container button:hover {
-    background-color: #0056b3;
-}
-
 /* Table */
 table {
     width: 100%;
-    border-collapse: collapse;
     margin-top: 20px;
+    border-collapse: collapse;
 }
 
 table th, table td {
@@ -126,19 +96,81 @@ table th {
     color: white;
 }
 
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.delete-button {
-    background-color: #dc3545;
+/* Buttons */
+.add-receptionist-button, .edit-button, .delete-button {
+    background-color: #007bff;
     color: white;
-    padding: 5px 10px;
     border: none;
+    padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.delete-button:hover {
-    background-color: #c82333;
+.edit-button {
+    background-color: #28a745;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+
+.input-container {
+    background-color: #f9f9f9; /* Light background for contrast */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Spacing inside the container */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    max-width: 400px; /* Limit width for compact form */
+    margin: 20px auto; /* Center alignment */
+}
+
+.input-container form {
+    display: flex;
+    flex-direction: column; /* Stack inputs vertically */
+}
+
+.input-container input[type="text"],
+.input-container input[type="password"] {
+    width: 95%; /* Full-width inputs */
+    padding: 10px; /* Spacing inside inputs */
+    margin-bottom: 15px; /* Space between inputs */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px; /* Font size for readability */
+    transition: border-color 0.3s ease; /* Smooth focus effect */
+}
+
+.input-container input[type="text"]:focus,
+.input-container input[type="password"]:focus {
+    border-color: #007bff; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.3); /* Glow effect on focus */
+}
+
+.input-container button {
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+    padding: 10px 15px; /* Spacing inside button */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Larger font size */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Button shadow */
+}
+
+.input-container button:hover {
+    background-color: #218838; /* Darker green on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Intense shadow on hover */
+}
+
+.input-container button:active {
+    transform: translateY(2px); /* Pressed button effect */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Reduced shadow on active */
 }

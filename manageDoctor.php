@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $daysAvailable = implode(", ", $_POST['days_available'] ?? []);
 
         if (!empty($doctorName) && !empty($specialization) && !empty($fee) && !empty($contactNumber) && !empty($email)) {
-            $stmt = $conn->prepare("INSERT INTO Doctors (DoctorName, Specialization, Fee, ContactNumber, Email, DaysAvailable) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO Doctors (DoctorID, DoctorName, Specialization, Fees, ContactNumber, DoctorEmail,DoctorPassword, DoctorAvailable) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("ssdsss", $doctorName, $specialization, $fee, $contactNumber, $email, $daysAvailable);
             $stmt->execute();
             $stmt->close();
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Fetch data for display
-$doctors = $conn->query("SELECT * FROM Doctors");
+$doctors = $conn->query("SELECT * FROM Doctor");
 ?>
 
 <!DOCTYPE html>
@@ -93,12 +93,14 @@ $doctors = $conn->query("SELECT * FROM Doctors");
 
                 <table>
                     <tr>
-                        <th>Doctor ID</th>
-                        <th>Doctor Name</th>
+                        <th>ID</th>
+                        <th>Name</th>
                         <th>Specialization</th>
                         <th>Fee</th>
-                        <th>Contact Number</th>
+                        <th>Contact</th>
                         <th>Email</th>
+
+                        <th>Password</th>
                         <th>Days Available</th>
                         <th>Actions</th>
                     </tr>
@@ -107,10 +109,12 @@ $doctors = $conn->query("SELECT * FROM Doctors");
                             <td><?= $row['DoctorID'] ?></td>
                             <td><?= $row['DoctorName'] ?></td>
                             <td><?= $row['Specialization'] ?></td>
-                            <td><?= $row['Fee'] ?></td>
+                            <td><?= $row['Fees'] ?></td>
                             <td><?= $row['ContactNumber'] ?></td>
-                            <td><?= $row['Email'] ?></td>
-                            <td><?= $row['DaysAvailable'] ?></td>
+                            <td><?= $row['DoctorEmail'] ?></td>
+
+                            <td><?= $row['DoctorPassword'] ?></td>
+                            <td><?= $row['DoctorAvailable'] ?></td>
                             <td>
                                 <form method="POST" style="display:inline;">
                                     <input type="hidden" name="entity" value="doctor">

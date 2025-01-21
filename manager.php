@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pricePerDay = $_POST['price_per_day'];
 
         if (!empty($roomNumber) && !empty($roomType) && !empty($pricePerDay)) {
-            $stmt = $conn->prepare("INSERT INTO Rooms (RoomNumber, Type, PricePerDay) VALUES (?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO room (RoomNumber, RoomType, RoomPrice) VALUES (?, ?, ?)");
             $stmt->bind_param("ssd", $roomNumber, $roomType, $pricePerDay);
             $stmt->execute();
             $stmt->close();
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($entity === 'room' && $action === 'delete') {
         $roomId = $_POST['room_id'];
         if (!empty($roomId)) {
-            $stmt = $conn->prepare("DELETE FROM Rooms WHERE RoomID = ?");
+            $stmt = $conn->prepare("DELETE FROM room WHERE RoomID = ?");
             $stmt->bind_param("i", $roomId);
             $stmt->execute();
             $stmt->close();
@@ -81,45 +81,42 @@ $rooms = $conn->query("SELECT * FROM room");
             <h2>Modify Rooms</h2>
             <div class="input-container">
                 <form method="POST">
-                    <input type="hidden" name="entity" value="room">
+                    <input type="hidden" name="entity" value="receptionist">
                     <input type="hidden" name="action" value="create">
-                    <input type="text" name="room_number" placeholder="Room Number" required>
-                    <select name="room_type" required>
-                        <option value="General">General</option>
-                        <option value="Semi-Private">Semi-Private</option>
-                        <option value="Private">Private</option>
-                    </select>
-                    <input type="number" name="price_per_day" placeholder="Price Per Day" required>
-                    <button type="submit" class="add-room-button">Add Room</button>
+                    <input type="text" name="rec_name" placeholder="Receptionist Name" required><br>
+                    <input type="text" name="rec_address" placeholder="Receptionist Address" required><br>
+                    <input type="text" name="rec_number" placeholder="Receptionist Contact Number" required><br>
+                    <input type="password" name="rec_password" placeholder="Password" required><br>
+                    <button type="submit" class="add-receptionist-button">Add Receptionist</button>
                 </form>
             </div>
-            
 
-                <table>
+
+            <table>
+                <tr>
+                    <th>Room ID</th>
+                    <th>Room Number</th>
+                    <th>Type</th>
+                    <th>Price Per Day</th>
+                    <th>Actions</th>
+                </tr>
+                <?php while ($row = $rooms->fetch_assoc()) { ?>
                     <tr>
-                        <th>Room ID</th>
-                        <th>Room Number</th>
-                        <th>Type</th>
-                        <th>Price Per Day</th>
-                        <th>Actions</th>
+                        <td><?= $row['RoomID'] ?></td>
+                        <td><?= $row['RoomNumber'] ?></td>
+                        <td><?= $row['RoomType'] ?></td>
+                        <td><?= $row['RoomPrice'] ?></td>
+                        <td>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="entity" value="room">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="room_id" value="<?= $row['RoomID'] ?>">
+                                <button type="submit" class="delete-button">Delete</button>
+                            </form>
+                        </td>
                     </tr>
-                    <?php while ($row = $rooms->fetch_assoc()) { ?>
-                        <tr>
-                            <td><?= $row['RoomID'] ?></td>
-                            <td><?= $row['RoomNumber'] ?></td>
-                            <td><?= $row['roomType'] ?></td>
-                            <td><?= $row['PricePerDay'] ?></td>
-                            <td>
-                                <form method="POST" style="display:inline;">
-                                    <input type="hidden" name="entity" value="room">
-                                    <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="room_id" value="<?= $row['RoomID'] ?>">
-                                    <button type="submit" class="delete-button">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </table>
+                <?php } ?>
+            </table>
             </div>
         </div>
     </div>

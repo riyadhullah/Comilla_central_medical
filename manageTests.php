@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $price = floatval($_POST['price']);
 
             if (!empty($testName) && $price > 0) {
-                $stmt = $conn->prepare("INSERT INTO Tests (TestName, Price) VALUES (?, ?)");
+                $stmt = $conn->prepare("INSERT INTO test (TestName, TestPrice) VALUES (?, ?)");
                 if ($stmt) {
                     $stmt->bind_param("sd", $testName, $price);
                     $stmt->execute();
@@ -35,9 +35,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($action === 'delete') {
             $testId = intval($_POST['test_id']);
             if ($testId > 0) {
-                $stmt = $conn->prepare("DELETE FROM Tests WHERE TestID = ?");
+                $stmt = $conn->prepare("DELETE FROM test WHERE TestID = ?");
                 if ($stmt) {
                     $stmt->bind_param("i", $testId);
+                    $stmt->execute();
+                    $stmt->close();
+                } else {
+                    error_log("Database error: " . $conn->error);
+                }
+            }
+        } elseif ($action === 'edit') {
+            $testId = intval($_POST['test_id']);
+            $testName = trim($_POST['test_name']);
+            $price = floatval($_POST['price']);
+
+            if ($testId > 0 && !empty($testName) && $price > 0) {
+                $stmt = $conn->prepare("UPDATE test SET TestName = ?, TestPrice = ? WHERE TestID = ?");
+                if ($stmt) {
+                    $stmt->bind_param("sdi", $testName, $price, $testId);
                     $stmt->execute();
                     $stmt->close();
                 } else {
@@ -53,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Fetch data for display
-$tests = $conn->query("SELECT * FROM Tests");
+$tests = $conn->query("SELECT * FROM Test");
 
 ?>
 
@@ -111,7 +126,7 @@ $tests = $conn->query("SELECT * FROM Tests");
                         <tr>
                             <td><?= htmlspecialchars($row['TestID']) ?></td>
                             <td><?= htmlspecialchars($row['TestName']) ?></td>
-                            <td><?= htmlspecialchars($row['Price']) ?></td>
+                            <td><?= htmlspecialchars($row['TestPrice']) ?></td>
                             <td>
                                 <form method="POST" style="display:inline;">
                                     <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
@@ -119,6 +134,15 @@ $tests = $conn->query("SELECT * FROM Tests");
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="test_id" value="<?= htmlspecialchars($row['TestID']) ?>">
                                     <button type="submit" class="delete-button">Delete</button>
+                                </form>
+                                <form method="POST" style="display:inline;">
+                                    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+                                    <input type="hidden" name="entity" value="test">
+                                    <input type="hidden" name="action" value="edit">
+                                    <input type="hidden" name="test_id" value="<?= htmlspecialchars($row['TestID']) ?>">
+                                    <input type="text" name="test_name" value="<?= htmlspecialchars($row['TestName']) ?>" required>
+                                    <input type="number" name="price" value="<?= htmlspecialchars($row['TestPrice']) ?>" step="0.01" required>
+                                    <button type="submit" class="edit-button">Edit</button>
                                 </form>
                             </td>
                         </tr>
