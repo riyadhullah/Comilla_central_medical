@@ -53,7 +53,9 @@ $stmt->close();
             <!-- Header with Logout button -->
             <header>
                 <h1>Comilla Central Medical</h1>
-                <button class="logout-button">Logout</button>
+                <form action="logout.php" method="POST">
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
             </header> 
                 <!-- Profile Form -->
                 <form class="appointment-form" action="p_update.php" method="post" onsubmit="return validateProfileForm()">

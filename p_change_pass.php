@@ -18,7 +18,6 @@
                 <li><a href="/Comilla_central_medical/appointment.php">Make Appointment</a></li>
                 <li><a href="/Comilla_central_medical/p_prescription.php">Prescription</a></li>
                 <li><a href="/Comilla_central_medical/p_view_appointment.php">View Appointment</a></li>
-                <li><a href="/Comilla_central_medical/billing.php">Billing</a></li>
                 <li><div class="settings-menu">
                     <a href="#settings" id="settings-icon">Settings</a>
                     <div class="dropdown" id="settings-dropdown" style="display: none;">
@@ -34,7 +33,9 @@
             <!-- Header with Logout button -->
             <header>
                 <h1>Comilla Central Medical</h1>
-                <button class="logout-button">Logout</button>
+                <form action="logout.php" method="POST">
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
             </header> 
 
             <div class="container">

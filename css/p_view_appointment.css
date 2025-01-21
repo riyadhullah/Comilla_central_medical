@@ -6,7 +6,6 @@ body {
    display: flex;
    justify-content: center;
    align-items: center;
-   min-height: 100vh;
    background-color: #eef2f7; /* Softer background */
 }
 
@@ -23,7 +22,7 @@ body {
    color: white;
    padding: 20px 10px;
    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-   height: auto; /* Full height sidebar */
+   height: 800px; /* Full height sidebar */
   
 }
 
