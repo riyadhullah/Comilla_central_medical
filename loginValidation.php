@@ -1,17 +1,23 @@
 <?php
 // Database connection
 $servername = "localhost";
-$username = "root"; // your database username
-$password = ""; // your database password
-$dbname = "Comilla_central_medical"; // your database name
+$username = "root"; // Your database username
+$password = ""; // Your database password
+$dbname = "Comilla_central_medical"; // Your database name
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 // Check connection
 if (mysqli_connect_errno()) {
-    die("Connection failed: " . mysqli_connect_error());
+    die(json_encode([
+        "success" => false,
+        "message" => "Database connection failed: " . mysqli_connect_error()
+    ]));
 }
+
+// Set the response type to JSON
+header('Content-Type: application/json');
 
 // Get form data
 $user_type = $_POST['user_type'];
@@ -46,25 +52,32 @@ if (mysqli_num_rows($result) > 0) {
     $stored_password = $row['Password']; // Database stored password
     if ($user_password === $stored_password) {
         // Password is correct, login successful
-        echo "Password is correct, login successful";
         session_start();
-        $_SESSION['user_id'] = $row['ID'];
-        $_SESSION['user_name'] = $row['Name'];
-        
-        // Redirect to respective dashboard
-        if ($user_type == 'patient') {
-            header("Location: p_dashboard.php"); // Patient Dashboard
-        } else {
-            header("Location: dashboard.php"); // Manager/Receptionist Dashboard
-        }
-        exit(); // Ensure the script stops executing after redirect
+        $_SESSION['user_id'] = $user_type == 'patient' ? $row['PatientID'] : $row['UserID'];
+        $_SESSION['user_name'] = $user_type == 'patient' ? $row['PatientName'] : $row['Username'];
+
+        // Determine the redirect URL
+        $redirect_url = ($user_type == 'patient') ? "p_dashboard.php" : "dashboard.php";
+
+        // Send success response as JSON
+        echo json_encode([
+            "success" => true,
+            "message" => "Login successful!",
+            "redirect_url" => $redirect_url
+        ]);
     } else {
         // Invalid password
-        echo "Invalid password.";
+        echo json_encode([
+            "success" => false,
+            "message" => "Invalid password."
+        ]);
     }
 } else {
     // User not found
-    echo "User not found.";
+    echo json_encode([
+        "success" => false,
+        "message" => "User not found."
+    ]);
 }
 
 mysqli_close($conn);

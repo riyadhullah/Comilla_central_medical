@@ -117,8 +117,6 @@ document.addEventListener("DOMContentLoaded", function()  {
             .then(data => {
                 if (data.success) {
                     alert(data.message); // Success message
-                    window.location.reload();  // Refresh the page after signup
-                    // Redirect to the dashboard page after successful signup
                     window.location.href = "loginPage.php"; 
                    
                 } else {

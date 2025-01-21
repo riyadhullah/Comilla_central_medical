@@ -17,7 +17,6 @@
                 <li><a href="/Comilla_central_medical/appointment.php">Make Appointment</a></li>
                 <li><a href="/Comilla_central_medical/p_prescription.php">Prescription</a></li>
                 <li><a href="/Comilla_central_medical/p_view_appointment.php">View Appointment</a></li>
-                <li><a href="#billing">Billing</a></li>
                 <li><div class="settings-menu">
                     <a href="#settings" id="settings-icon">Settings</a>
                     <div class="dropdown" id="settings-dropdown" style="display: none;">

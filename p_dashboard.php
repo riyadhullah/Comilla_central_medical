@@ -1,16 +1,15 @@
 <?php
-// Start the session to simulate a logged-in patient and some prescription data
-session_start();
-$_SESSION['patient_name'] = "John Doe"; // Example patient name
-
+// Include the appointments.php file to fetch the appointment data
+include('p_dashboardValid.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Dashboard</title>
-    <link rel="stylesheet" href="css\p_dashboard.css">
+    <link rel="stylesheet" href="css/p_dashboard.css">
 </head>
 <body>
     <div class="container">
@@ -23,7 +22,6 @@ $_SESSION['patient_name'] = "John Doe"; // Example patient name
                 <li><a href="/Comilla_central_medical/appointment.php">Make Appointment</a></li>
                 <li><a href="/Comilla_central_medical/p_prescription.php">Prescription</a></li>
                 <li><a href="/Comilla_central_medical/p_view_appointment.php">View Appointment</a></li>
-                <li><a href="/Comilla_central_medical/p_profile.php">Billing</a></li>
                 <li><div class="settings-menu">
                     <a href="#settings" id="settings-icon">Settings</a>
                     <div class="dropdown" id="settings-dropdown" style="display: none;">
@@ -37,18 +35,24 @@ $_SESSION['patient_name'] = "John Doe"; // Example patient name
         <!-- Main Content -->
         <div class="main-content">
             <header>
-                 <h1>Comilla Central Medical</h1>
-                <button class="logout-button">Logout</button>
+                <h1>Comilla Central Medical</h1>
+                <form action="logout.php" method="POST">
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
             </header>
             <header>
-                    <h1>Your Dashboard</h1>
-                    <p>Welcome, <?php echo htmlspecialchars($_SESSION['patient_name']); ?>!</p>
-                </header>
+                <h1>Your Dashboard</h1>
+                <p>Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</p>
+            </header>
                
             <!-- Stats Section -->
             <div class="stats">
-                <div class="stat-card">Upcoming Appointments: 2</div>
-                <div class="stat-card">Last Appointment: 15 Jan 2025</div>
+                <div class="stat-card">
+                    Your Upcoming Appointments: <?php echo $upcoming_appointments; ?>
+                </div>
+                <div class="stat-card">
+                    Your Upcoming Appointment Day: <?php echo $formatted_next_appointment; ?>
+                </div>
             </div>
 
             <!-- Quick Actions -->
@@ -61,7 +65,6 @@ $_SESSION['patient_name'] = "John Doe"; // Example patient name
             <!-- Health Records -->
             <div class="health-records">
                 <h3>Recent Health Records</h3>
-                <div class="record-card">Blood Test Report: Normal (12 Jan 2025)</div>
                 <div class="record-card">Prescription: Amoxicillin 500mg (15 Jan 2025)</div>
             </div>
 
