@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Send AJAX request with form data to the server
-        fetch("/Comilla_central_medical/loginValidation.php", {
+        fetch("loginValidation.php", {
             method: "POST",
             body: formData,
         })

@@ -39,6 +39,6 @@
         <!-- Signup link for patients only -->
         <p id="signup-link" style="display: none;">No account? <a href="p_signup.php">Please Signup</a></p>
     </div>
-    <script src="/Comilla_central_medical/login.js"></script>
+    <script src="login.js"></script>
 </body>
 </html>
