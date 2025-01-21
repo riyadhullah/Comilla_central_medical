@@ -7,14 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $entity = $_POST['entity'] ?? '';
     $action = $_POST['action'] ?? '';
 
-    if ($entity === 'doctor' && $action === 'create') {
+    if ($entity === 'doctor' && $action === 'update') {
         $doctorName = $_POST['doctor_name'];
         $specialization = $_POST['specialization'];
         $fee = $_POST['fee'];
+        $contactNumber = $_POST['contact_number'];
+        $email = $_POST['email'];
+        $daysAvailable = implode(", ", $_POST['days_available'] ?? []);
 
-        if (!empty($doctorName) && !empty($specialization) && !empty($fee)) {
-            $stmt = $conn->prepare("INSERT INTO Doctors (DoctorName, Specialization, Fee) VALUES (?, ?, ?)");
-            $stmt->bind_param("ssd", $doctorName, $specialization, $fee);
+        if (!empty($doctorName) && !empty($specialization) && !empty($fee) && !empty($contactNumber) && !empty($email)) {
+            $stmt = $conn->prepare("INSERT INTO Doctors (DoctorName, Specialization, Fee, ContactNumber, Email, DaysAvailable) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssdsss", $doctorName, $specialization, $fee, $contactNumber, $email, $daysAvailable);
             $stmt->execute();
             $stmt->close();
         }
@@ -64,15 +67,27 @@ $doctors = $conn->query("SELECT * FROM Doctors");
             </header>
 
             <div class="content">
-                <h2>Register New Doctor</h2>
+                <h2>Update Doctor Information</h2>
                 <div class="input-container">
                     <form method="POST">
                         <input type="hidden" name="entity" value="doctor">
-                        <input type="hidden" name="action" value="create">
+                        <input type="hidden" name="action" value="update">
                         <input type="text" name="doctor_name" placeholder="Doctor Name" required>
                         <input type="text" name="specialization" placeholder="Specialization" required>
                         <input type="number" name="fee" placeholder="Visit Fee" step="0.01" required>
-                        <button type="submit" class="add-doctor-button">Add Doctor</button>
+                        <input type="text" name="contact_number" placeholder="Contact Number" required>
+                        <input type="email" name="email" placeholder="Email Address" required>
+                        <div class="days-available">
+                            <label>Days Available:</label>
+                            <label><input type="checkbox" name="days_available[]" value="Monday"> Monday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Tuesday"> Tuesday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Wednesday"> Wednesday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Thursday"> Thursday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Friday"> Friday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Saturday"> Saturday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Sunday"> Sunday</label>
+                        </div>
+                        <button type="submit" class="update-doctor-button">Update Doctor</button>
                     </form>
                 </div>
 
@@ -82,6 +97,9 @@ $doctors = $conn->query("SELECT * FROM Doctors");
                         <th>Doctor Name</th>
                         <th>Specialization</th>
                         <th>Fee</th>
+                        <th>Contact Number</th>
+                        <th>Email</th>
+                        <th>Days Available</th>
                         <th>Actions</th>
                     </tr>
                     <?php while ($row = $doctors->fetch_assoc()) { ?>
@@ -90,6 +108,9 @@ $doctors = $conn->query("SELECT * FROM Doctors");
                             <td><?= $row['DoctorName'] ?></td>
                             <td><?= $row['Specialization'] ?></td>
                             <td><?= $row['Fee'] ?></td>
+                            <td><?= $row['ContactNumber'] ?></td>
+                            <td><?= $row['Email'] ?></td>
+                            <td><?= $row['DaysAvailable'] ?></td>
                             <td>
                                 <form method="POST" style="display:inline;">
                                     <input type="hidden" name="entity" value="doctor">

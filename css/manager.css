@@ -1,38 +1,124 @@
-/* Aligning Manager Content */
-.content h2 {
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-form {
+/* General styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
+    height: 100vh;
 }
 
-form input, form select, form button {
-    margin: 8px 0;
-    padding: 6px 12px;
-    font-size: 14px;
-    border: 1px solid #ccc;
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background-color: #343a40;
+    color: white;
+    padding: 20px 10px;
+    height: 100%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
     border-radius: 5px;
-    width: 40%; /* Smaller input fields */
+    transition: background 0.3s;
 }
 
+.sidebar ul li a:hover {
+    background-color: #495057;
+}
+
+/* Main content */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #343a40;
+}
+
+.logout-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+/* Input form */
+.input-container {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f1f3f5;
+    border-radius: 8px;
+}
+
+.input-container input,
+.input-container select {
+    margin: 8px 0;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    width: calc(33% - 20px);
+}
+
+.input-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.input-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Table */
 table {
-    margin: 20px auto;
-    width: 90%; /* Adjust table size */
+    width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 table th, table td {
-    padding: 6px 10px;
+    padding: 10px;
     text-align: center;
     border: 1px solid #ddd;
-    font-size: 14px;
 }
 
 table th {
@@ -45,79 +131,14 @@ table tr:nth-child(even) {
 }
 
 .delete-button {
-    background-color: #dc3545; /* Red button */
+    background-color: #dc3545;
     color: white;
+    padding: 5px 10px;
     border: none;
-    padding: 6px 10px;
-    cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 .delete-button:hover {
-    background-color: #c82333; /* Darker red on hover */
+    background-color: #c82333;
 }
-
-.add-room-button {
-    background-color: #2b912b; /* Light green color */
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.add-room-button:hover {
-    background-color: #2b912b; /* Darker green on hover */
-}
-
-/* ------------------------input container starts----------------------- */
-.input-container {
-    background-color: #4e5153; /* Purple background */
-    padding: 15px;
-    border-radius: 8px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.input-container input,
-.input-container select {
-    width: 200px; /* Ensure all inputs and select are the same width */
-    padding: 6px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    height: 35px; /* Ensure consistent height */
-}
-
-.input-container button {
-    width: 100px; /* Half the width of the text boxes */
-    height: 35px; /* Match the height of the text boxes */
-    padding: 6px;
-    border: none;
-    border-radius: 4px;
-    background-color: rgb(12, 119, 12); /* Light green color for the button */
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.input-container button:hover {
-    background-color: rgb(12, 119, 12); /* Darker green on hover */
-}
-
-.sidebar ul li a[href="#rooms"] {
-    color: #00008b; /* Deep Blue Color */
-    font-weight: bold; /* Optional: Make it bold for emphasis */
-}
-
-
-/* ------------------------input container ends----------------------- */
-

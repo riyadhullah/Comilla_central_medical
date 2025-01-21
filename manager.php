@@ -1,12 +1,18 @@
 <?php
 session_start();
-include 'db.php';
+// Database configuration
+$host = 'localhost'; // Replace with your host
+$username = 'root'; // Replace with your database username
+$password = ''; // Replace with your database password
+$dbname = 'comilla_central_medical'; // Replace with your database name
 
-// Uncomment this section in production
-// if ($_SESSION['Role'] != 'Manager') {
-//     header("Location: login.php");
-//     exit();
-// }
+// Create a connection
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -36,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Fetch data for display
-$rooms = $conn->query("SELECT * FROM Rooms");
+$rooms = $conn->query("SELECT * FROM room");
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +107,7 @@ $rooms = $conn->query("SELECT * FROM Rooms");
                         <tr>
                             <td><?= $row['RoomID'] ?></td>
                             <td><?= $row['RoomNumber'] ?></td>
-                            <td><?= $row['Type'] ?></td>
+                            <td><?= $row['roomType'] ?></td>
                             <td><?= $row['PricePerDay'] ?></td>
                             <td>
                                 <form method="POST" style="display:inline;">

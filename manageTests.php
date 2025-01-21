@@ -2,34 +2,59 @@
 session_start();
 include 'db.php';
 
+// Generate CSRF token if not already set
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validate CSRF token
+    if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        die("Invalid CSRF token");
+    }
+
     $entity = $_POST['entity'] ?? '';
     $action = $_POST['action'] ?? '';
 
-    if ($entity === 'test' && $action === 'create') {
-        $testName = $_POST['test_name'];
-        $price = $_POST['price'];
+    if ($entity === 'test') {
+        if ($action === 'create') {
+            $testName = trim($_POST['test_name']);
+            $price = floatval($_POST['price']);
 
-        if (!empty($testName) && !empty($price)) {
-            $stmt = $conn->prepare("INSERT INTO Tests (TestName, Price) VALUES (?, ?)");
-            $stmt->bind_param("sd", $testName, $price);
-            $stmt->execute();
-            $stmt->close();
-        }
-    } elseif ($entity === 'test' && $action === 'delete') {
-        $testId = $_POST['test_id'];
-        if (!empty($testId)) {
-            $stmt = $conn->prepare("DELETE FROM Tests WHERE TestID = ?");
-            $stmt->bind_param("i", $testId);
-            $stmt->execute();
-            $stmt->close();
+            if (!empty($testName) && $price > 0) {
+                $stmt = $conn->prepare("INSERT INTO Tests (TestName, Price) VALUES (?, ?)");
+                if ($stmt) {
+                    $stmt->bind_param("sd", $testName, $price);
+                    $stmt->execute();
+                    $stmt->close();
+                } else {
+                    error_log("Database error: " . $conn->error);
+                }
+            }
+        } elseif ($action === 'delete') {
+            $testId = intval($_POST['test_id']);
+            if ($testId > 0) {
+                $stmt = $conn->prepare("DELETE FROM Tests WHERE TestID = ?");
+                if ($stmt) {
+                    $stmt->bind_param("i", $testId);
+                    $stmt->execute();
+                    $stmt->close();
+                } else {
+                    error_log("Database error: " . $conn->error);
+                }
+            }
         }
     }
+
+    // Redirect to prevent form resubmission
+    header('Location: manageTests.php');
+    exit;
 }
 
 // Fetch data for display
 $tests = $conn->query("SELECT * FROM Tests");
+
 ?>
 
 <!DOCTYPE html>
@@ -66,6 +91,7 @@ $tests = $conn->query("SELECT * FROM Tests");
                 <h2>Register New Test</h2>
                 <div class="input-container">
                     <form method="POST">
+                        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                         <input type="hidden" name="entity" value="test">
                         <input type="hidden" name="action" value="create">
                         <input type="text" name="test_name" placeholder="Test Name" required>
@@ -83,14 +109,15 @@ $tests = $conn->query("SELECT * FROM Tests");
                     </tr>
                     <?php while ($row = $tests->fetch_assoc()) { ?>
                         <tr>
-                            <td><?= $row['TestID'] ?></td>
-                            <td><?= $row['TestName'] ?></td>
-                            <td><?= $row['Price'] ?></td>
+                            <td><?= htmlspecialchars($row['TestID']) ?></td>
+                            <td><?= htmlspecialchars($row['TestName']) ?></td>
+                            <td><?= htmlspecialchars($row['Price']) ?></td>
                             <td>
                                 <form method="POST" style="display:inline;">
+                                    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                                     <input type="hidden" name="entity" value="test">
                                     <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="test_id" value="<?= $row['TestID'] ?>">
+                                    <input type="hidden" name="test_id" value="<?= htmlspecialchars($row['TestID']) ?>">
                                     <button type="submit" class="delete-button">Delete</button>
                                 </form>
                             </td>
