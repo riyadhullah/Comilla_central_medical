@@ -23,7 +23,7 @@
             <!-- Username Field -->
             <div class="form-group" id="username-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                <input type="text" id="username" name="username" placeholder="Enter your username">
             </div>
             <!-- Contact Number Field for Patient -->
             <div class="form-group" id="contact-group" style="display: none;">
