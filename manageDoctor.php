@@ -14,17 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $contactNumber = $_POST['contact_number'];
         $email = $_POST['email'];
         $daysAvailable = implode(", ", $_POST['days_available'] ?? []);
+        $doctorId = $_POST['doctor_id'];
 
         if (!empty($doctorName) && !empty($specialization) && !empty($fee) && !empty($contactNumber) && !empty($email)) {
-            $stmt = $conn->prepare("INSERT INTO Doctors (DoctorID, DoctorName, Specialization, Fees, ContactNumber, DoctorEmail,DoctorPassword, DoctorAvailable) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssdsss", $doctorName, $specialization, $fee, $contactNumber, $email, $daysAvailable);
+            $stmt = $conn->prepare("UPDATE Doctors SET DoctorName=?, Specialization=?, Fees=?, ContactNumber=?, DoctorEmail=?, DoctorPassword=?, DoctorAvailable=? WHERE DoctorID=?");
+            $stmt->bind_param("ssdssssi", $doctorName, $specialization, $fee, $contactNumber, $email, $password, $daysAvailable, $doctorId);
             $stmt->execute();
             $stmt->close();
         }
     } elseif ($entity === 'doctor' && $action === 'delete') {
         $doctorId = $_POST['doctor_id'];
         if (!empty($doctorId)) {
-            $stmt = $conn->prepare("DELETE FROM Doctors WHERE DoctorID = ?");
+            $stmt = $conn->prepare("DELETE FROM Doctor WHERE DoctorID = ?");
             $stmt->bind_param("i", $doctorId);
             $stmt->execute();
             $stmt->close();
@@ -33,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Fetch data for display
-$doctors = $conn->query("SELECT * FROM Doctor");
+$doctor = $conn->query("SELECT * FROM Doctor");
 ?>
 
 <!DOCTYPE html>
@@ -50,10 +51,11 @@ $doctors = $conn->query("SELECT * FROM Doctor");
         <nav class="sidebar">
             <h2>Menu</h2>
             <ul>
-                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="/Comilla_central_medical/managerDashboard.php">Dashboard</a></li>
                 <li><a href="/Comilla_central_medical/manager.php">Manage Rooms</a></li>
                 <li><a href="/Comilla_central_medical/manageDoctor.php">Manage Doctors</a></li>
                 <li><a href="/Comilla_central_medical/manageTests.php">Manage Tests</a></li>
+                <li><a href="/Comilla_central_medical/manageReceptionist.php">Manage Receptionist</a></li>
                 <li><a href="#settings">Settings</a></li>
                 <li><a href="#help">Help</a></li>
             </ul>
@@ -72,20 +74,21 @@ $doctors = $conn->query("SELECT * FROM Doctor");
                     <form method="POST">
                         <input type="hidden" name="entity" value="doctor">
                         <input type="hidden" name="action" value="update">
-                        <input type="text" name="doctor_name" placeholder="Doctor Name" required>
-                        <input type="text" name="specialization" placeholder="Specialization" required>
-                        <input type="number" name="fee" placeholder="Visit Fee" step="0.01" required>
-                        <input type="text" name="contact_number" placeholder="Contact Number" required>
-                        <input type="email" name="email" placeholder="Email Address" required>
+                        <input type="hidden" name="doctor_id" value="<?= $doctorId ?? '' ?>"> <!-- for update -->
+                        <input type="text" name="doctor_name" placeholder="Doctor Name" value="<?= $doctorName ?? '' ?>" required>
+                        <input type="text" name="specialization" placeholder="Specialization" value="<?= $specialization ?? '' ?>" required>
+                        <input type="number" name="fee" placeholder="Visit Fee" step="0.01" value="<?= $fee ?? '' ?>" required>
+                        <input type="text" name="contact_number" placeholder="Contact Number" value="<?= $contactNumber ?? '' ?>" required>
+                        <input type="email" name="email" placeholder="Email Address" value="<?= $email ?? '' ?>" required>
                         <div class="days-available">
                             <label>Days Available:</label>
-                            <label><input type="checkbox" name="days_available[]" value="Monday"> Monday</label>
-                            <label><input type="checkbox" name="days_available[]" value="Tuesday"> Tuesday</label>
-                            <label><input type="checkbox" name="days_available[]" value="Wednesday"> Wednesday</label>
-                            <label><input type="checkbox" name="days_available[]" value="Thursday"> Thursday</label>
-                            <label><input type="checkbox" name="days_available[]" value="Friday"> Friday</label>
-                            <label><input type="checkbox" name="days_available[]" value="Saturday"> Saturday</label>
-                            <label><input type="checkbox" name="days_available[]" value="Sunday"> Sunday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Monday" <?= in_array("Monday", explode(", ", $daysAvailable)) ? 'checked' : '' ?>> Monday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Tuesday" <?= in_array("Tuesday", explode(", ", $daysAvailable)) ? 'checked' : '' ?>> Tuesday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Wednesday" <?= in_array("Wednesday", explode(", ", $daysAvailable)) ? 'checked' : '' ?>> Wednesday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Thursday" <?= in_array("Thursday", explode(", ", $daysAvailable)) ? 'checked' : '' ?>> Thursday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Friday" <?= in_array("Friday", explode(", ", $daysAvailable)) ? 'checked' : '' ?>> Friday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Saturday" <?= in_array("Saturday", explode(", ", $daysAvailable)) ? 'checked' : '' ?>> Saturday</label>
+                            <label><input type="checkbox" name="days_available[]" value="Sunday" <?= in_array("Sunday", explode(", ", $daysAvailable)) ? 'checked' : '' ?>> Sunday</label>
                         </div>
                         <button type="submit" class="update-doctor-button">Update Doctor</button>
                     </form>
@@ -99,12 +102,11 @@ $doctors = $conn->query("SELECT * FROM Doctor");
                         <th>Fee</th>
                         <th>Contact</th>
                         <th>Email</th>
-
                         <th>Password</th>
                         <th>Days Available</th>
                         <th>Actions</th>
                     </tr>
-                    <?php while ($row = $doctors->fetch_assoc()) { ?>
+                    <?php while ($row = $doctor->fetch_assoc()) { ?>
                         <tr>
                             <td><?= $row['DoctorID'] ?></td>
                             <td><?= $row['DoctorName'] ?></td>
@@ -112,7 +114,6 @@ $doctors = $conn->query("SELECT * FROM Doctor");
                             <td><?= $row['Fees'] ?></td>
                             <td><?= $row['ContactNumber'] ?></td>
                             <td><?= $row['DoctorEmail'] ?></td>
-
                             <td><?= $row['DoctorPassword'] ?></td>
                             <td><?= $row['DoctorAvailable'] ?></td>
                             <td>
@@ -121,6 +122,10 @@ $doctors = $conn->query("SELECT * FROM Doctor");
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="doctor_id" value="<?= $row['DoctorID'] ?>">
                                     <button type="submit" class="delete-button">Delete</button>
+                                </form>
+                                <form method="GET" style="display:inline;">
+                                    <input type="hidden" name="edit_doctor_id" value="<?= $row['DoctorID'] ?>">
+                                    <button type="submit" class="edit-button">Edit</button>
                                 </form>
                             </td>
                         </tr>

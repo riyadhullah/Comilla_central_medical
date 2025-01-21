@@ -12,13 +12,11 @@
         <nav class="sidebar">
             <h2>Menu</h2>
             <ul>
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#admission">Admission</a></li>
+                <li><a href="/Comilla_central_medical/r_dashboard.php">Dashboard</a></li>
+                <li><a href="/Comilla_central_medical/Admission/admission.php">Admission</a></li>
                 <li><a href="/Comilla_central_medical/appointment.php">Appointments</a></li>
-                <li><a href="#patients">Patients</a></li>
+                <li><a href="/Comilla_central_medical/Patient/patient.php">Patients</a></li>
                 <li><a href="#doctors">Doctors</a></li>
-                <li><a href="#billing">Billing</a></li>
-                <li><a href="#reports">Reports</a></li>
                 <li><a href="#settings">Settings</a></li>
                 <li><a href="#help">Help</a></li>
             </ul>
@@ -44,10 +42,6 @@
             <div class="card">
                 <h4>Total Doctors</h4>
                 <p>20</p>
-            </div>
-            <div class="card">
-                <h4>Total Nurses</h4>
-                <p>35</p>
             </div>
             <div class="card">
                 <h4>Available Rooms</h4>

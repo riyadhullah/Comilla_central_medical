@@ -1,16 +1,7 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "hospitalmanagementsystem";
+session_start();
+include '..\db.php';
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Get the search parameters
 $patientId = isset($_POST['patientId']) ? $_POST['patientId'] : '';
@@ -18,19 +9,23 @@ $patientName = isset($_POST['patientName']) ? $_POST['patientName'] : '';
 $patientMobile = isset($_POST['patientMobile']) ? $_POST['patientMobile'] : '';
 
 // Build the query
-$sql = "SELECT * FROM patients WHERE 1=1";
+$sql = "SELECT Admission.PatientID, Patient.PatientName, Patient.ContactNumber, Patient.Email, 
+        Patient.BloodGroup, Admission.AdmissionDate, Admission.AdmissionStatus 
+        FROM Admission 
+        JOIN Patient ON Admission.PatientID = Patient.PatientID
+        WHERE Admission.AdmissionStatus IN ('Admitted', 'Discharged')";
 
 if (!empty($patientId)) {
-    $sql .= " AND PatientID LIKE '%" . $conn->real_escape_string($patientId) . "%'";
+    $sql .= " AND Admission.PatientID LIKE '%" . $conn->real_escape_string($patientId) . "%'";
 }
 if (!empty($patientName)) {
-    $sql .= " AND PatientName LIKE '%" . $conn->real_escape_string($patientName) . "%'";
+    $sql .= " AND Patient.PatientName LIKE '%" . $conn->real_escape_string($patientName) . "%'";
 }
 if (!empty($patientMobile)) {
-    $sql .= " AND ContactNumber LIKE '%" . $conn->real_escape_string($patientMobile) . "%'";
+    $sql .= " AND Patient.ContactNumber LIKE '%" . $conn->real_escape_string($patientMobile) . "%'";
 }
 
-$result = mysqli_query($conn,$sql);
+$result = mysqli_query($conn, $sql);
 
 // Generate the HTML for the table rows
 if ($result->num_rows > 0) {
@@ -38,19 +33,18 @@ if ($result->num_rows > 0) {
         echo "<tr>
                 <td>{$row['PatientID']}</td>
                 <td>{$row['PatientName']}</td>
-                <td>riyadh</td>
-                <td>riyadh</td>
                 <td>{$row['ContactNumber']}</td>
                 <td>{$row['Email']}</td>
-                <td>riyadh</td>
+                <td>{$row['BloodGroup']}</td>
                 <td>{$row['AdmissionDate']}</td>
+                <td>{$row['AdmissionStatus']}</td>
                 <td>
                     <button class='discharge-btn' onclick='dischargePatient({$row['PatientID']})'>Discharge</button>
                 </td>
               </tr>";
     }
 } else {
-    echo "<tr><td colspan='9'>No patients found</td></tr>";
+    echo "<tr><td colspan='8'>No patients found</td></tr>";
 }
 
 $conn->close();
