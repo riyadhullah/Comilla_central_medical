@@ -6,7 +6,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     background-color: #eef2f7; /* Softer background */
  }
  
@@ -23,7 +22,7 @@ body {
     color: white;
     padding: 20px 10px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    height: auto; /* Full height sidebar */
+    height: 800px; /* Full height sidebar */
    
  }
  
@@ -88,14 +87,14 @@ body {
     color: #000;
  }
  .main-content {
-    flex-grow: 1;
-    padding: 35px 10px; /* change top bar logout */
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background: #fdfefe;
-    overflow-y: auto;
-    scroll-behavior: smooth;
+   flex-grow: 1;
+   padding: 35px 10px; /* change top bar logout */
+   display: flex;
+   flex-direction: column;
+   position: relative;
+   background: #fdfefe;
+   overflow-y: auto;
+   scroll-behavior: smooth;
  }
  
  header {
@@ -136,9 +135,9 @@ body {
  }
  
  .content {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
+   margin-top: 10px;
+   display: flex;
+   flex-direction: column;
  }
  
 .prescription {
@@ -164,6 +163,9 @@ body {
     margin: 5px 0;
     font-size: 15px;
     color: #555;
+    
+    
+
 }
 
 .medications ul {

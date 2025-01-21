@@ -131,6 +131,7 @@ form input, form button {
 }
 
 /* Table styles */
+/* Table styles */
 table {
     margin: 20px auto;
     width: 90%;
@@ -153,6 +154,13 @@ table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+/* Separate Action Columns */
+.table-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Delete Button */
 .delete-button {
     background-color: #dc3545;
     width: 80px;
@@ -168,21 +176,22 @@ table tr:nth-child(even) {
     background-color: #c82333;
 }
 
-.add-test-button {
-    background-color: #2b912b;
+/* Edit Button */
+.edit-button {
+    background-color: #ffc107;
+    width: 80px;
     color: white;
     border: none;
     padding: 6px 10px;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
-.add-test-button:hover {
-    background-color: #238b23;
+.edit-button:hover {
+    background-color: #e0a800;
 }
+
 
 /* Input Container */
 .input-container {

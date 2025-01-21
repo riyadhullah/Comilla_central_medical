@@ -10,7 +10,7 @@
 <body>
     <div class="login-container">
         <h1>Login</h1>
-        <form action="loginValidation.php" method="POST">
+        <form id="login-form" action="loginValidation.php" method="POST">
             <div class="form-group1">
                 <label for="user-type">User Type:</label>
                 <select id="user-type" name="user_type" required>
@@ -28,7 +28,7 @@
             <!-- Contact Number Field for Patient -->
             <div class="form-group" id="contact-group" style="display: none;">
                 <label for="contact-number">Contact Number:</label>
-                <input type="text" id="contact-number" name="contact_number" placeholder="Enter your contact number" required>
+                <input type="text" id="contact-number" name="contact_number" placeholder="Enter your contact number" >
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>

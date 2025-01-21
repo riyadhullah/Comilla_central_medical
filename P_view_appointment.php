@@ -1,28 +1,23 @@
 <?php
-session_start();
-$_SESSION['patient_name'] = "John Doe"; // Example patient name
+// Include the database connection
+include 'p_profileValid.php';
 
-// Example appointment data
-$appointments = [
-    [
-        "date" => "2025-01-15",
-        "doctor" => "Dr. Sarah Ahmed",
-        "time" => "10:00 AM",
-        "status" => "Confirmed"
-    ],
-    [
-        "date" => "2025-01-20",
-        "doctor" => "Dr. David Smith",
-        "time" => "2:00 PM",
-        "status" => "Pending"
-    ],
-    [
-        "date" => "2025-01-25",
-        "doctor" => "Dr. Emily Johnson",
-        "time" => "11:30 AM",
-        "status" => "Completed"
-    ]
-];
+
+// Start session
+session_start();
+
+// Get the PatientID from the session
+$patient_id = $_SESSION['user_id']; // Make sure the PatientID is stored in the session
+
+// Fetch the appointment details for the patient
+$sql = "SELECT a.AppointmentDate, d.DoctorName, a.Status
+        FROM Appointment a
+        JOIN Doctor d ON a.DoctorID = d.DoctorID
+        WHERE a.PatientID = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $patient_id);
+$stmt->execute();
+$appointment_result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +25,8 @@ $appointments = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointments - Comilla Central Medical</title>
-    <link rel="stylesheet" href="css\p_view_appointment.css">
+    <title>View Appointment - Comilla Central Medical</title>
+    <link rel="stylesheet" href="css/p_view_appointment.css">
 </head>
 <body>
     <div class="container">
@@ -44,7 +39,6 @@ $appointments = [
                 <li><a href="/Comilla_central_medical/appointment.php">Make Appointment</a></li>
                 <li><a href="/Comilla_central_medical/p_prescription.php">Prescription</a></li>
                 <li><a href="/Comilla_central_medical/p_view_appointment.php">View Appointment</a></li>
-                <li><a href="/Comilla_central_medical/billing.php">Billing</a></li>
                 <li><div class="settings-menu">
                     <a href="#settings" id="settings-icon">Settings</a>
                     <div class="dropdown" id="settings-dropdown" style="display: none;">
@@ -60,30 +54,47 @@ $appointments = [
             <!-- Header with Logout button -->
             <header>
                 <h1>Comilla Central Medical</h1>
-                <button class="logout-button">Logout</button>
+                <form action="logout.php" method="POST">
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
             </header>
 
             <!-- Second Header for the dashboard -->
             <header>
                 <h1>Your Appointment</h1>
-                <p>Welcome, <?php echo htmlspecialchars($_SESSION['patient_name']); ?>!</p>
+                <p>Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</p>
             </header>
 
             <!-- Appointments List -->
             <div class="content">
-                <?php foreach ($appointments as $appointment): ?>
-                    <div class="appointment">
-                        <h2>Date: <?php echo htmlspecialchars($appointment['date']); ?></h2>
-                        <p><strong>Doctor:</strong> <?php echo htmlspecialchars($appointment['doctor']); ?></p>
-                        <p><strong>Time:</strong> <?php echo htmlspecialchars($appointment['time']); ?></p>
-                        <div class="status <?php echo htmlspecialchars($appointment['status']); ?>">
-                            Status: <?php echo htmlspecialchars($appointment['status']); ?>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+                <?php
+                // Check if any appointment exists
+                if ($appointment_result->num_rows > 0) {
+                    // Fetch and display each appointment
+                    while ($row = $appointment_result->fetch_assoc()) {
+                        $appointment_date = new DateTime($row['AppointmentDate']);
+                        $formatted_date = $appointment_date->format('F j, Y');
+                        $day_of_week = $appointment_date->format('l');
+                        echo "<div class='appointment'>";
+                        echo "<h2>Date: $formatted_date</h2>";
+                        echo "<p><strong>Doctor:</strong> " . htmlspecialchars($row['DoctorName']) . "</p>";
+                        echo "<p><strong>Day:</strong> $day_of_week</p>";
+                        echo "<div class='status " . htmlspecialchars($row['Status']) . "'>Status: " . htmlspecialchars($row['Status']) . "</div>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "<p>No appointment found for this patient.</p>";
+                }
+                ?>
             </div>
         </div>
     </div>
     <script src="/Comilla_central_medical/p_setting.js"></script>
 </body>
 </html>
+
+<?php
+// Close the statement and connection
+$stmt->close();
+$conn->close();
+?>

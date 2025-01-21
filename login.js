@@ -1,10 +1,11 @@
- // Handle User Type selection for login form
- document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     const userTypeSelect = document.getElementById('user-type');
     const usernameGroup = document.getElementById('username-group');
     const contactNumberGroup = document.getElementById('contact-group');
     const signupLink = document.getElementById('signup-link');
-    
+    const loginForm = document.getElementById("login-form");
+
+    // Update the visibility of fields based on user type
     userTypeSelect.addEventListener('change', function() {
         if (userTypeSelect.value === 'patient') {
             usernameGroup.style.display = 'none'; // Hide Username field
@@ -16,23 +17,48 @@
             signupLink.style.display = 'none'; // Hide signup link for non-patients
         }
     });
+
+
+    loginForm.addEventListener("submit", function(e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        // Collect form data
+        const formData = new FormData(loginForm);
+
+        // Perform basic client-side validation (optional)
+        const userType = userTypeSelect.value;
+        if (userType === 'patient') {
+            const contactNumber = formData.get('contact_number'); // Adjust the name if needed
+            if (!contactNumber || contactNumber.trim() === '') {
+                alert('Please provide your contact number.');
+                return;
+            }
+        } else {
+            const username = formData.get('username'); // Adjust the name if needed
+            if (!username || username.trim() === '') {
+                alert('Please provide your username.');
+                return;
+            }
+        }
+
+        // Send AJAX request with form data to the server
+        fetch("/Comilla_central_medical/loginValidation.php", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json()) // Parse JSON response
+        .then(data => {
+            if (data.success) {
+                alert(data.message); // Display success message
+                window.location.href = data.redirect_url; // Redirect to the dashboard
+            } 
+            else {
+                alert(data.message); // Display error message
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("An error occurred during login.");
+        });
+    });
 });
-
-// Check if the message parameter is set in the URL (for success message)
-const urlParams = new URLSearchParams(window.location.search);
-const message = urlParams.get('message');
-
-// If the message is 'login_success', show the success message
-if (message === 'login_success') {
-    // Create a div element to display the message
-    const successMessage = document.createElement('div');
-    successMessage.style.backgroundColor = '#4CAF50';
-    successMessage.style.color = 'white';
-    successMessage.style.padding = '15px';
-    successMessage.style.margin = '10px 0';
-    successMessage.style.borderRadius = '5px';
-    successMessage.textContent = 'Successfully logged in!';
-
-    // Append the message to the body or any other container
-    document.body.prepend(successMessage); // or append to any specific element
-}
