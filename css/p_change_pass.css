@@ -129,6 +129,38 @@ header h1 {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px);
 }
+/* Success message style */
+.successs {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Error message style */
+.errorr {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+/* Error message styling */
+#password_error {
+    color: red;
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+
 
 .content {
     margin-top: 10px;
@@ -148,7 +180,7 @@ header h1 {
     position: absolute; /* Allows centering in the viewport */
     top: 50%; /* Push down to 50% of the viewport height */
     left: 50%; /* Push right to 50% of the viewport width */
-    transform: translate(-30%, -50%); /* Adjust the position back to center */
+    transform: translate(-30%, -40%); /* Adjust the position back to center */
     flex-direction: column;
     align-items: center;
 }
@@ -175,7 +207,23 @@ header h1 {
     border: 1px solid #ccc;
     border-radius: 8px;
 }
-
+.error {
+    color: #d9534f;
+    font-size: 12px;
+    display: block;
+    margin: 5px;
+}
+.success {
+    color: #5cb85c;
+    font-size: 12px;
+    display: none;
+}
+.invalid {
+    border-color: #d9534f;
+}
+.valid {
+    border-color: #5cb85c;
+}
 .appointment-form .radio-group {
     display: flex;
     align-items: center;

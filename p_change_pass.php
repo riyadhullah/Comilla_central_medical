@@ -1,17 +1,18 @@
-
+<?php 
+     include('p_changepassValid.php'); // Include the PHP logic
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointments - Comilla Central Medical</title>
-    <link rel="stylesheet" href="css\p_change_pass.css">
+    <title>Change Password - Comilla Central Medical</title>
+    <link rel="stylesheet" href="css/p_change_pass.css">
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar Menu -->
         <nav class="sidebar">
-            <h2>Menu</h2>
+        <h2>Menu</h2>
             <ul>
                 <li><a href="/Comilla_central_medical/p_dashboard.php">Dashboard</a></li>
                 <li><a href="/Comilla_central_medical/p_profile.php">Profile</a></li>
@@ -27,10 +28,9 @@
                 <li><a href="#help">Help</a></li>
             </ul>
         </nav>
+        </nav>
 
-        <!-- Main Content -->
         <div class="main-content">
-            <!-- Header with Logout button -->
             <header>
                 <h1>Comilla Central Medical</h1>
                 <form action="logout.php" method="POST">
@@ -38,34 +38,31 @@
                 </form>
             </header> 
 
-            <div class="container">
-        
+            <!-- Success/Error messages -->
+            <?php if (!empty($success_message)) : ?>
+                <p class="successs"><?php echo $success_message; ?></p>
+            <?php endif; ?>
+            <?php if (!empty($error_message)) : ?>
+                <p class="errorr"><?php echo $error_message; ?></p>
+            <?php endif; ?>
 
-        <?php if (!empty($success_message)) : ?>
-            <p class="success"><?php echo $success_message; ?></p>
-        <?php endif; ?>
+            <!-- Change Password Form -->
+            <form class="appointment-form" action="p_change_pass.php" method="POST">
+                <h1>Change Password</h1>
+                <label for="current_password">Current Password:</label>
+                <input type="password" name="current_password" id="current_password" required>
 
-        <?php if (!empty($error_message)) : ?>
-            <p class="error"><?php echo $error_message; ?></p>
-        <?php endif; ?>
+                <label for="new_password">New Password:</label>
+                <input type="password" name="new_password" id="new_password" required>
+                <p id="password_error"></p>
 
-        <form class="appointment-form" action="" method="POST">
-            <h1>Change Password</h1>
-            <label for="current_password">Current Password:</label>
-            <input type="password" name="current_password" id="current_password" required>
+                <label for="confirm_password">Confirm New Password:</label>
+                <input type="password" name="confirm_password" id="confirm_password" required>
 
-            <label for="new_password">New Password:</label>
-            <input type="password" name="new_password" id="new_password" required>
-
-            <label for="confirm_password">Confirm New Password:</label>
-            <input type="password" name="confirm_password" id="confirm_password" required>
-
-            <button type="submit" class="btn-group">Change Password</button>
-        </form>
-    </div>
-
+                <button type="submit" class="btn-group">Change Password</button>
+            </form>
         </div>
     </div>
-    <script src="/Comilla_central_medical/p_setting.js"></script>
+    <script src="/Comilla_central_medical/p_changepass.js"></script>
 </body>
 </html>
