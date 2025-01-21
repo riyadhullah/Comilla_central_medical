@@ -1,21 +1,15 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "hospitalmanagementsystem";
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+session_start();
+include '..\db.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-$sql = "SELECT * FROM patients";
-$result = mysqli_query($conn,$sql);
-$count = mysqli_num_rows($result);
-
-
+// Fetch patients who are admitted or discharged
+$sql = "SELECT Admission.PatientID, Patient.PatientName, Patient.ContactNumber, Patient.Email, 
+        Patient.BloodGroup, Admission.AdmissionDate, Admission.AdmissionStatus 
+        FROM Admission 
+        JOIN Patient ON Admission.PatientID = Patient.PatientID
+        WHERE Admission.AdmissionStatus IN ('Admitted', 'Discharged')";
+$result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +18,7 @@ $count = mysqli_num_rows($result);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comilla Central Medical</title>
-    <link rel="stylesheet" href="css//patient.css">
+    <link rel="stylesheet" href="../css/patient.css">
 </head>
 <body>
     <div class="container">
@@ -32,14 +26,11 @@ $count = mysqli_num_rows($result);
         <nav class="sidebar">
             <h2>Menu</h2>
             <ul>
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="/Comilla_central_medical/appointment.php">Appointments</a></li>
-                <li><a href="#patients">Patients</a></li>
+                <li><a href="..\r_dashboard.php">Dashboard</a></li>
+                <li><a href="..\Admission\admission.php">Admission</a></li>
+                <li><a href="..\appointment.php">Appointments</a></li>
+                <li><a href="patient.php">Patients</a></li>
                 <li><a href="#doctors">Doctors</a></li>
-                <li><a href="#departments">Departments</a></li>
-                <li><a href="#billing">Billing</a></li>
-                <li><a href="#pharmacy">Pharmacy</a></li>
-                <li><a href="#reports">Reports</a></li>
                 <li><a href="#settings">Settings</a></li>
                 <li><a href="#help">Help</a></li>
             </ul>
@@ -74,12 +65,11 @@ $count = mysqli_num_rows($result);
                             <tr>
                                 <th>Patient ID</th>
                                 <th>Name</th>
-                                <th>Age</th>
-                                <th>Sex</th>
                                 <th>Mobile Number</th>
                                 <th>Email</th>
                                 <th>Blood Group</th>
                                 <th>Admission Date</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -90,54 +80,26 @@ if ($result->num_rows > 0) {
         echo "<tr>
                 <td>{$row['PatientID']}</td>
                 <td>{$row['PatientName']}</td>
-                <td>riyadh</td>
-                <td>riyadh</td>
                 <td>{$row['ContactNumber']}</td>
                 <td>{$row['Email']}</td>
-                <td>riyadh</td>
+                <td>{$row['BloodGroup']}</td>
                 <td>{$row['AdmissionDate']}</td>
+                <td>{$row['AdmissionStatus']}</td>
                 <td>
                     <button class='discharge-btn' onclick='dischargePatient({$row['PatientID']})'>Discharge</button>
                 </td>
               </tr>";
     }
 } else {
-    echo "<tr><td colspan='9'>No patients found</td></tr>";
+    echo "<tr><td colspan='8'>No patients found</td></tr>";
 }
                             ?>
-                            <!-- Patient details will be populated here by AJAX -->
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
-
-    <script>
-    function fetchPatientData() {
-        // Get the search inputs
-        const patientId = document.getElementById('patient-id').value;
-        const patientName = document.getElementById('patient-name').value;
-        const patientMobile = document.getElementById('patient-mobile').value;
-
-        // Prepare the AJAX request
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/Comilla_central_medical/fetch_patient.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // Update the table body with the response
-                document.getElementById('patient-data').innerHTML = xhr.responseText;
-            }
-        };
-
-        // Send the request with search parameters
-        const params = `patientId=${encodeURIComponent(patientId)}&patientName=${encodeURIComponent(patientName)}&patientMobile=${encodeURIComponent(patientMobile)}`;
-        xhr.send(params);
-    }
-</script>
-
+<script src="js/patient.js"></script>
 </body>
 </html>
