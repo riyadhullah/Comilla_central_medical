@@ -95,7 +95,7 @@ $receptionists = $conn->query("SELECT * FROM receptionist");
         <div class="main-content">
         <form action="logout.php">
             <header>
-                <h1>Comilla Central Medical - Dashboard</h1>
+                <h1>Comilla Central Medical</h1>
                 <button class="logout-button">Logout</button>
             </header>
             </form>

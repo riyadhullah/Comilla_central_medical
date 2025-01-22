@@ -1,10 +1,10 @@
 <?php
 session_start();
 // Database configuration
-$host = 'localhost'; // Replace with your host
-$username = 'root'; // Replace with your database username
-$password = ''; // Replace with your database password
-$dbname = 'comilla_central_medical'; // Replace with your database name
+$host = 'localhost'; 
+$username = 'root'; 
+$password = ''; 
+$dbname = 'comilla_central_medical'; 
 
 // Create a connection
 $conn = new mysqli($host, $username, $password, $dbname);
@@ -56,7 +56,7 @@ $rooms = $conn->query("SELECT * FROM room");
 </head>
 <body>
     <div class="container">
-        <!-- Include Sidebar -->
+        <!-- Sidebar -->
         <nav class="sidebar">
             <h2>Menu</h2>
             <ul>
@@ -70,54 +70,60 @@ $rooms = $conn->query("SELECT * FROM room");
 
         <!-- Main Content -->
         <div class="main-content">
-        <form action="logout.php">
-            <header>
-                <h1>Comilla Central Medical - Dashboard</h1>
-                <button class="logout-button">Logout</button>
-            </header>
+            <form action="logout.php" method="POST">
+                <header>
+                    <h1>Comilla Central Medical</h1>
+                    <button class="logout-button">Logout</button>
+                </header>
             </form>
 
-            <!-- Manager Sections -->
+            <!-- Modify Rooms Section -->
             <div class="content">
-            <h2>Modify Rooms</h2>
-            <div class="input-container">
-                <form method="POST">
-                    <input type="hidden" name="entity" value="receptionist">
-                    <input type="hidden" name="action" value="create">
-                    <input type="text" name="rec_name" placeholder="Receptionist Name" required><br>
-                    <input type="text" name="rec_address" placeholder="Receptionist Address" required><br>
-                    <input type="text" name="rec_number" placeholder="Receptionist Contact Number" required><br>
-                    <input type="password" name="rec_password" placeholder="Password" required><br>
-                    <button type="submit" class="add-receptionist-button">Add Receptionist</button>
-                </form>
-            </div>
+                <h2 style="text-align: center;">Add Room</h2>
+                <div class="input-container">
+                    <form method="POST">
+                        <input type="hidden" name="entity" value="room">
+                        <input type="hidden" name="action" value="create">
+                        <input type="text" name="room_number" placeholder="Room Number" required><br>
+                        <select id="room_type" name="room_type" required>
+                            <option value="Single">Single</option>
+                            <option value="Double">Double</option>
+                            <option value="Suit">Suit</option>
+                        </select>
+                        <input type="text" name="price_per_day" placeholder="Price Per Day" required><br>
+                        <button type="submit" class="add-receptionist-button">Add Room</button>
+                    </form>
+                </div>
 
-
-            <table>
-                <tr>
-                    <th>Room ID</th>
-                    <th>Room Number</th>
-                    <th>Type</th>
-                    <th>Price Per Day</th>
-                    <th>Actions</th>
-                </tr>
-                <?php while ($row = $rooms->fetch_assoc()) { ?>
-                    <tr>
-                        <td><?= $row['RoomID'] ?></td>
-                        <td><?= $row['RoomNumber'] ?></td>
-                        <td><?= $row['RoomType'] ?></td>
-                        <td><?= $row['RoomPrice'] ?></td>
-                        <td>
-                            <form method="POST" style="display:inline;">
-                                <input type="hidden" name="entity" value="room">
-                                <input type="hidden" name="action" value="delete">
-                                <input type="hidden" name="room_id" value="<?= $row['RoomID'] ?>">
-                                <button type="submit" class="delete-button">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                <?php } ?>
-            </table>
+                <!-- Display Rooms -->
+                <div class="table-container">
+                    <h2>Rooms List</h2>
+                    <table>
+                        <tr>
+                            <th>Room ID</th>
+                            <th>Room Number</th>
+                            <th>Type</th>
+                            <th>Price Per Day</th>
+                            <th>Actions</th>
+                        </tr>
+                        <?php while ($row = $rooms->fetch_assoc()) { ?>
+                            <tr>
+                                <td><?= $row['RoomID'] ?></td>
+                                <td><?= $row['RoomNumber'] ?></td>
+                                <td><?= $row['RoomType'] ?></td>
+                                <td><?= $row['RoomPrice'] ?></td>
+                                <td>
+                                    <form method="POST" style="display:inline;">
+                                        <input type="hidden" name="entity" value="room">
+                                        <input type="hidden" name="action" value="delete">
+                                        <input type="hidden" name="room_id" value="<?= $row['RoomID'] ?>">
+                                        <button type="submit" class="delete-button">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -174,3 +174,17 @@ tr:hover {
 form {
     margin: 0;
 }
+
+.add-new-doctor-button {
+    background-color: #4CAF50;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.add-new-doctor-button:hover {
+    background-color: #45a049;
+}

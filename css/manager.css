@@ -146,11 +146,21 @@ button:hover {
 }
 
 .input-container input[type="text"]:focus,
-.input-container input[type="password"]:focus {
+.input-container input[type="password"]:focus
+ {
     border-color: #007bff; /* Blue border on focus */
     outline: none; /* Remove default outline */
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.3); /* Glow effect on focus */
 }
+.input-container select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
 
 .input-container button {
     background-color: #28a745; /* Green background */
