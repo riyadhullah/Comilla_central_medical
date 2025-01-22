@@ -1,6 +1,4 @@
 <?php
-    session_start();
-
     // Database configuration
     $host = 'localhost';
     $username = 'root';
@@ -61,10 +59,28 @@
                 // Fetch data for display
             $receptionists = $conn->query("SELECT * FROM receptionist");
 
-        
+            $sql = "SELECT *FROM patient";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $countPatient = mysqli_num_rows($result);
+            
+            $sql = "SELECT * FROM `admission` WHERE `AdmissionStatus` LIKE 'Admitted'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $countAdmittedPatient = mysqli_num_rows($result);
+            
+            $sql = "SELECT * FROM `doctor`";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $countDoctor = mysqli_num_rows($result);
+            
+            $sql = "SELECT * FROM `room`";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $countRoom = mysqli_num_rows($result);
+            
         ?>
 
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -85,38 +101,34 @@
                 <li><a href="/Comilla_central_medical/manageDoctor.php">Manage Doctors</a></li>
                 <li><a href="/Comilla_central_medical/manageTests.php">Manage Tests</a></li>
                 <li><a href="/Comilla_central_medical/manageReceptionist.php">Manage Receptionist</a></li>
-                <li><a href="#settings">Settings</a></li>
-                <li><a href="#help">Help</a></li>
             </ul>
         </nav>
 
         <!-- Main Content -->
         <div class="main-content">
+        <form action="logout.php">
             <header>
-                <h1>Receptionist Dashboard</h1>
+                <h1>Comilla Central Medical - Dashboard</h1>
                 <button class="logout-button">Logout</button>
             </header>
+            </form>
         <!-- Overview Section -->
         <section class="overview">
-            <div class="card">
+        <div class="card">
                 <h4>Total Patients</h4>
-                <p>125</p>
+                <p><?php echo $countPatient ?></p>
             </div>
             <div class="card">
                 <h4>Admitted Patients</h4>
-                <p>45</p>
+                <p><?php echo $countAdmittedPatient ?></p>
             </div>
             <div class="card">
                 <h4>Total Doctors</h4>
-                <p>20</p>
-            </div>
-            <div class="card">
-                <h4>Total Nurses</h4>
-                <p>35</p>
+                <p><?php echo $countDoctor ?></p>
             </div>
             <div class="card">
                 <h4>Available Rooms</h4>
-                <p>10</p>
+                <p><?php echo $countRoom ?></p>
             </div>
 
             
@@ -124,7 +136,7 @@
 
          <!-- Receptionist -->
                 
-            <div class="table">
+            <div class="table-container">
             <h2>Receptionists List</h2>
             <table>
                 <tr>
