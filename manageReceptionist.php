@@ -88,20 +88,20 @@ $receptionists = $conn->query("SELECT * FROM receptionist");
                 <li><a href="/Comilla_central_medical/manageDoctor.php">Manage Doctors</a></li>
                 <li><a href="/Comilla_central_medical/manageTests.php">Manage Tests</a></li>
                 <li><a href="/Comilla_central_medical/manageReceptionist.php">Manage Receptionist</a></li>
-                <li><a href="#settings">Settings</a></li>
-                <li><a href="#help">Help</a></li>
             </ul>
         </nav>
 
         <!-- Main Content -->
         <div class="main-content">
+        <form action="logout.php">
             <header>
-                <h1>Manage Receptionists</h1>
+                <h1>Comilla Central Medical - Dashboard</h1>
                 <button class="logout-button">Logout</button>
             </header>
+            </form>
 
             <div class="content">
-                <h2>Add or Edit Receptionist</h2>
+                <h2 style="text-align: center;">Add or Edit Receptionist</h2>
                 <div class="input-container">
                     <form method="POST">
                         <input type="hidden" name="action" value="create">

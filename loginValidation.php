@@ -35,7 +35,7 @@ if ($user_type === 'patient') {
     $redirect_page = 'r_dashboard.php';
 } elseif ($user_type === 'manager') {
     $sql = "SELECT * FROM Manager WHERE UserName = '$username_or_contact' AND Password = '$password' LIMIT 1";
-    $redirect_page = 'managerdashboard.php';
+    $redirect_page = 'managerDashboard.php';
 }
 
 // Execute query
