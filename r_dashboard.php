@@ -1,4 +1,12 @@
 <?php
+
+session_start();
+if($_SESSION['userType'] != "receptionist")
+{
+    header("Location: loginPage.php");
+    exit();
+}
+
 include 'db.php';
 
 $sql = "SELECT *FROM patient";
@@ -47,7 +55,7 @@ $result11 = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receptionist Dashboard - Comilla Central Medical</title>
+    <title>Comilla Central Medical</title>
     <link rel="stylesheet" href="css/r_dashboard.css">
 </head>
 <body>
@@ -58,20 +66,18 @@ $result11 = mysqli_query($conn, $sql);
             <ul>
                 <li><a href="/Comilla_central_medical/r_dashboard.php">Dashboard</a></li>
                 <li><a href="/Comilla_central_medical/Admission/admission.php">Admission</a></li>
-                <li><a href="/Comilla_central_medical/appointment.php">Appointments</a></li>
                 <li><a href="/Comilla_central_medical/Patient/patient.php">Patients</a></li>
-                <li><a href="#doctors">Doctors</a></li>
-                <li><a href="#settings">Settings</a></li>
-                <li><a href="#help">Help</a></li>
             </ul>
         </nav>
 
         <!-- Main Content -->
         <div class="main-content">
+            <form action="logout.php">
             <header>
-                <h1>Receptionist Dashboard</h1>
+                <h1>Comilla Central Medical - Dashboard</h1>
                 <button class="logout-button">Logout</button>
             </header>
+            </form>
             <div class="content">
         <!-- Overview Section -->
         <section class="overview">
@@ -141,52 +147,6 @@ $result11 = mysqli_query($conn, $sql);
                 </table>
             </section>
 
-
-        <!-- Patient Search Section -->
-        <section class="patient-search">
-            <h3>Search for Patients</h3>
-            <form action="#" method="GET" onsubmit="showPatientDetails(event)">
-                <input type="text" name="patient_name" placeholder="Enter patient name or ID" required>
-                <button type="submit">Search</button>
-            </form>
-            <div class="patient-details" id="patient-details">
-                <h4>Patient Details</h4>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Patient ID</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Room</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>101</td>
-                            <td>John Doe</td>
-                            <td>45</td>
-                            <td>102</td>
-                            <td>Admitted</td>
-                        </tr>
-                        <tr>
-                            <td>103</td>
-                            <td>Jane Smith</td>
-                            <td>30</td>
-                            <td>103</td>
-                            <td>Discharged</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <script>
-            function showPatientDetails(event) {
-                event.preventDefault();
-                document.getElementById('patient-details').style.display = 'block';
-            }
-        </script>
     </div>
 
         </div>

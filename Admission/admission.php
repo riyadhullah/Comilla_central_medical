@@ -71,19 +71,17 @@ $roomResult = $conn->query($roomQuery);
             <ul>
                 <li><a href="..\r_dashboard.php">Dashboard</a></li>
                 <li><a href="..\Admission\admission.php">Admission</a></li>
-                <li><a href="..\appointment.php">Appointments</a></li>
                 <li><a href="..\Patient\patient.php">Patients</a></li>
-                <li><a href="#doctors">Doctors</a></li>
-                <li><a href="#settings">Settings</a></li>
-                <li><a href="#help">Help</a></li>
             </ul>
         </nav>
 
         <div class="main-content">
+            <form action="..\logout.php">
             <header>
-                <h1>Comilla Central Medical - Patient Admission</h1>
+                <h1>Comilla Central Medical - Dashboard</h1>
                 <button class="logout-button">Logout</button>
             </header>
+            </form>
             <div class="content">
                 <h2>Patient Admission</h2>
                 

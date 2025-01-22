@@ -16,7 +16,7 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comilla Central Medical</title>
+    <title>Comilla Central Medical - Patient</title>
     <link rel="stylesheet" href="../css/patient.css">
 </head>
 <body>
@@ -27,20 +27,18 @@ $result = mysqli_query($conn, $sql);
             <ul>
                 <li><a href="..\r_dashboard.php">Dashboard</a></li>
                 <li><a href="..\Admission\admission.php">Admission</a></li>
-                <li><a href="..\appointment.php">Appointments</a></li>
                 <li><a href="patient.php">Patients</a></li>
-                <li><a href="#doctors">Doctors</a></li>
-                <li><a href="#settings">Settings</a></li>
-                <li><a href="#help">Help</a></li>
             </ul>
         </nav>
 
         <!-- Main Content -->
         <div class="main-content">
+        <form action="..\logout.php">
             <header>
-                <h1>Comilla Central Medical</h1>
+                <h1>Comilla Central Medical - Dashboard</h1>
                 <button class="logout-button">Logout</button>
             </header>
+            </form>
             <div class="content">
                 <h2>Patient Management</h2>
                 <div class="patient-management">
