@@ -2,12 +2,12 @@
 // appointments.php
 
 session_start();
-
-if (!isset($_SESSION['user_id'])) {
-    // If the session is not set, redirect to the login page
-    header("Location: loginValidation.php");
+if($_SESSION['userType'] != "patient")
+{
+    header("Location: loginPage.php");
     exit();
 }
+
 
 // Now you can access the session data
 $patient_id = $_SESSION['user_id'];
@@ -24,6 +24,20 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check database connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch prescriptions for the patient
+$sql = "SELECT  p.PrescriptionDescription
+        FROM Prescription p
+        JOIN Doctor d ON p.DoctorID = d.DoctorID
+        WHERE p.PatientID = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $patient_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$prescriptions = [];
+while ($row = $result->fetch_assoc()) {
+    $prescriptions[] = $row['PrescriptionDescription'];
 }
 
 // Query 1: Count of upcoming appointments

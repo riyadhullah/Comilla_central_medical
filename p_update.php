@@ -19,9 +19,9 @@ $address = $_POST['address'];
 $blood_group = $_POST['blood_group'];
 
 // Prepare the SQL update statement
-$sql = "UPDATE Patient SET PatientName = ?, DateOfBirth = ?, Gender = ?, ContactNumber = ?, Email = ?, Address = ?, BloodGroup = ? WHERE PatientID = ?";
+$sql = "UPDATE Patient SET PatientName = ?, DateOfBirth = ?, Gender = ?, Email = ?, Address = ?, BloodGroup = ? WHERE PatientID = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssssssi", $full_name, $dob, $gender, $contact_number, $email, $address, $blood_group, $patient_id);
+$stmt->bind_param("sssssssi", $full_name, $dob, $gender, $email, $address, $blood_group, $patient_id);
 
 // Execute the update statement
 if ($stmt->execute()) {

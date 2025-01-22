@@ -5,10 +5,9 @@ include 'p_profileValid.php';
 // Start session
 session_start();
 
-// Check if the patient is logged in
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to login page if no session exists
-    header("Location: login.php");
+if($_SESSION['userType'] != "patient")
+{
+    header("Location: loginPage.php");
     exit();
 }
 

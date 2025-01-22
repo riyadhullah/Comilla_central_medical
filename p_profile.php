@@ -3,6 +3,7 @@
 
 session_start();
 
+
 // Include the database connection
 include 'p_profileValid.php';
 
@@ -79,7 +80,7 @@ $stmt->close();
                     </div>
                     <div class="form-group">
                         <label for="contact_number">Contact Number</label>
-                        <input type="text" id="contact_number" name="contact_number" value="<?php echo htmlspecialchars($patient['ContactNumber']); ?>" required>
+                        <input type="text" id="contact_number" name="contact_number" value="<?php echo htmlspecialchars($patient['ContactNumber']); ?>" readonly>
                         <small class="error" id="contact_error"></small>
                     </div>
                     <div class="form-group">

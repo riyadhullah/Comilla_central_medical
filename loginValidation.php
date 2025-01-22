@@ -26,6 +26,10 @@ $redirect_page = '';
 if ($user_type === 'patient') {
     $sql = "SELECT * FROM Patient WHERE ContactNumber = '$username_or_contact' AND Password = '$password' LIMIT 1";
     $redirect_page = 'p_dashboard.php';
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $_SESSION['user_id'] =$row['PatientID'];
+    $_SESSION['user_name'] =$row['PatientName'];
 } elseif ($user_type === 'receptionist') {
     $sql = "SELECT * FROM Receptionist WHERE RecNumber = '$username_or_contact' AND RecPassword = '$password' LIMIT 1";
     $redirect_page = 'r_dashboard.php';

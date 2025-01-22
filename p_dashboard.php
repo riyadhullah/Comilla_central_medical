@@ -1,6 +1,7 @@
 <?php
 // Include the appointments.php file to fetch the appointment data
 include('p_dashboardValid.php');
+$prescriptionDescriptions = implode("<br>", $prescriptions);
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +66,17 @@ include('p_dashboardValid.php');
             <!-- Health Records -->
             <div class="health-records">
                 <h3>Recent Health Records</h3>
-                <div class="record-card">Prescription: Amoxicillin 500mg (15 Jan 2025)</div>
+                <div class="stat-card">
+                <?php
+                // Check if there are any prescriptions
+                    if (!empty($prescriptions)) {
+                        echo $prescriptionDescriptions;  // Display the prescription descriptions
+                    } 
+                    else {
+                        echo "No Health Records";  // If no prescriptions, display this message
+                    }
+                ?>
+            </div>
             </div>
 
             <!-- Announcements -->
